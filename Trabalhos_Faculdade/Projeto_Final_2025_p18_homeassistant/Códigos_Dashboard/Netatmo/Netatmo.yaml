@@ -1,0 +1,90 @@
+views:
+  - sections:
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: sensor.netatmo_1piso_rain_gauge_battery
+              - entity: sensor.netatmo_1piso_rain_gauge_precipitation
+              - entity: sensor.netatmo_1piso_rain_gauge_precipitation_today
+              - entity: binary_sensor.netatmo_1piso_rain_gauge_connectivity
+            title: Rain Gauge
+          - type: entities
+            entities:
+              - entity: sensor.netatmo_1piso_anemometer_battery
+                name: Battery
+              - entity: binary_sensor.netatmo_1piso_anemometer_connectivity
+                name: Connectivity
+                secondary_info: none
+            title: 1 Floor Anenometer
+          - show_state: false
+            show_name: false
+            camera_view: auto
+            fit_mode: cover
+            type: picture-entity
+            entity: camera.netatmo_welcome
+            image: https://demo.home-assistant.io/stub_config/bedroom.png
+            camera_image: camera.netatmo_welcome
+            grid_options:
+              columns: 12
+              rows: 5
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: sensor.netatmo_1piso_temperature
+                name: Temprature
+              - entity: sensor.netatmo_1piso_humidity
+                name: Humidity
+              - entity: sensor.netatmo_1piso_noise
+                name: Noise
+              - entity: binary_sensor.netatmo_1piso_connectivity
+                name: Connectivity
+              - entity: sensor.netatmo_1piso_atmospheric_pressure
+                name: Atmospheric pressure
+              - entity: sensor.netatmo_1piso_carbon_dioxide
+                name: Carbon dioxide
+            title: 1 Floor
+          - type: entities
+            entities:
+              - entity: sensor.netatmo_1piso_netatmo_exterior_battery
+                name: Battery
+              - entity: sensor.netatmo_1piso_netatmo_exterior_temperature
+                name: Outdoor Temperature
+              - entity: sensor.netatmo_1piso_netatmo_exterior_humidity
+                name: Outdoor Humidity
+              - entity: binary_sensor.netatmo_1piso_netatmo_exterior_connectivity
+                name: Connectivity
+              - entity: sensor.netatmo_1piso_anemometer_wind_speed
+              - entity: sensor.netatmo_1piso_anemometer_wind_direction
+            title: 1 Floor Outdoor
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: sensor.netatmo_1piso_netatmo_sala_battery
+                name: Battery
+              - entity: binary_sensor.netatmo_1piso_netatmo_sala_connectivity
+                name: Connectivity
+              - entity: sensor.netatmo_1piso_netatmo_sala_temperature
+                name: Temperature
+              - entity: sensor.netatmo_1piso_netatmo_sala_humidity
+              - entity: sensor.netatmo_1piso_netatmo_sala_carbon_dioxide
+            title: 1 Floor Living Room
+          - type: entities
+            entities:
+              - entity: sensor.netatmo_1piso_anemometer_wind_speed
+              - entity: sensor.netatmo_1piso_anemometer_wind_direction
+              - entity: binary_sensor.netatmo_1piso_anemometer_connectivity
+              - entity: sensor.netatmo_1piso_anemometer_battery
+            title: Smart Anemometer
+    type: sections
+    max_columns: 4
+    cards: []
+    background:
+      opacity: 100
+      alignment: center
+      size: cover
+      repeat: repeat
+      attachment: fixed
+      image: /api/image/serve/e997fe46e68be617845b452a42ad9a08/original

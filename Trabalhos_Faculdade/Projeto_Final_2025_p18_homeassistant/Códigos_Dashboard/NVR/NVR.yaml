@@ -1,0 +1,156 @@
+views:
+  - title: Cameras
+    sections:
+      - type: grid
+        cards:
+          - show_state: false
+            show_name: false
+            camera_view: live
+            fit_mode: cover
+            type: picture-entity
+            entity: camera.camera1_transparente
+            image: https://demo.home-assistant.io/stub_config/bedroom.png
+            camera_image: camera.camera1_transparente
+            grid_options:
+              columns: 15.6
+              rows: 5
+          - show_state: false
+            show_name: false
+            camera_view: live
+            fit_mode: cover
+            type: picture-entity
+            entity: camera.escadas_4_transparente
+            image: https://demo.home-assistant.io/stub_config/bedroom.png
+            camera_image: camera.escadas_4_transparente
+            grid_options:
+              columns: 15.6
+              rows: 5
+          - show_state: false
+            show_name: false
+            camera_view: live
+            fit_mode: cover
+            type: picture-entity
+            entity: camera.frente_1_transparente
+            image: https://demo.home-assistant.io/stub_config/bedroom.png
+            camera_image: camera.frente_1_transparente
+            grid_options:
+              columns: 15.6
+              rows: 5
+          - show_state: false
+            show_name: false
+            camera_view: live
+            fit_mode: cover
+            type: picture-entity
+            entity: camera.garagem_8_transparente
+            image: https://demo.home-assistant.io/stub_config/bedroom.png
+            camera_image: camera.garagem_8_transparente
+            grid_options:
+              columns: 15.6
+              rows: 5
+          - show_state: false
+            show_name: false
+            camera_view: live
+            fit_mode: cover
+            type: picture-entity
+            entity: camera.piscina_5_transparente
+            image: https://demo.home-assistant.io/stub_config/bedroom.png
+            camera_image: camera.piscina_5_transparente
+            grid_options:
+              columns: 15.6
+              rows: 5
+          - show_state: false
+            show_name: false
+            camera_view: live
+            fit_mode: cover
+            type: picture-entity
+            entity: camera.platibanda_6_transparente
+            image: https://demo.home-assistant.io/stub_config/bedroom.png
+            camera_image: camera.platibanda_6_transparente
+            grid_options:
+              columns: 15.6
+              rows: 5
+          - show_state: false
+            show_name: false
+            camera_view: live
+            fit_mode: cover
+            type: picture-entity
+            entity: camera.rampa_norte_3_transparente
+            image: https://demo.home-assistant.io/stub_config/bedroom.png
+            camera_image: camera.rampa_norte_3_transparente
+            grid_options:
+              columns: 15.6
+              rows: 5
+          - show_state: false
+            show_name: false
+            camera_view: live
+            fit_mode: cover
+            type: picture-entity
+            entity: camera.rampa_sul_2_transparente
+            image: https://demo.home-assistant.io/stub_config/bedroom.png
+            camera_image: camera.rampa_sul_2_transparente
+            grid_options:
+              columns: 15.6
+              rows: 5
+          - show_state: false
+            show_name: false
+            camera_view: live
+            fit_mode: cover
+            type: picture-entity
+            entity: camera.netatmo_welcome
+            image: https://demo.home-assistant.io/stub_config/bedroom.png
+            camera_image: camera.netatmo_welcome
+            grid_options:
+              columns: 15.6
+              rows: 5
+        column_span: 4
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - switch.portao_garagem
+        title: Portao_Garagem
+    type: sections
+    max_columns: 4
+    background:
+      opacity: 100
+      alignment: center
+      size: cover
+      repeat: repeat
+      attachment: fixed
+  - type: sections
+    max_columns: 1
+    title: camera_swipe
+    path: camera-swipe
+    sections:
+      - type: grid
+        cards:
+          - type: custom:simple-swipe-card
+            cards:
+              - type: picture-entity
+                entity: camera.frente_1_transparente
+                camera_image: camera.frente_1_transparente
+                camera_view: live
+                show_name: false
+                show_state: false
+                fit_mode: cover
+              - type: picture-entity
+                entity: camera.garagem_8_transparente
+                camera_image: camera.garagem_8_transparente
+                camera_view: live
+                show_name: false
+                show_state: false
+                fit_mode: cover
+            show_pagination: true
+            card_spacing: 15
+            enable_loopback: false
+            swipe_direction: horizontal
+            enable_auto_swipe: false
+    subview: true
+    cards: []
+    background:
+      opacity: 100
+      alignment: center
+      size: cover
+      repeat: repeat
+      attachment: fixed
+      image: /api/image/serve/042da564a81479034c4f084294c9266c/original

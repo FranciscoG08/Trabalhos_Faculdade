@@ -1,0 +1,312 @@
+<?php
+
+/** @var yii\web\View $this */
+/** @var yii\bootstrap5\ActiveForm $form */
+
+/** @var app\models\LoginForm $model */
+
+use yii\bootstrap5\ActiveForm;
+use yii\bootstrap5\Html;
+
+$this->title = 'Login';
+$this->params['breadcrumbs'][] = $this->title;
+$this->registerCssFile(Yii::$app->request->baseUrl . '/css/estilo_carro.css', ['position' => \yii\web\View::POS_HEAD]);
+$this->registerCssFile(Yii::$app->request->baseUrl . '/css/standard.css', ['position' => \yii\web\View::POS_HEAD]);
+
+// Assuming $id is the ID of the car passed through the URL
+$id = Yii::$app->request->get('id');
+$car = \app\models\Veiculos::findOne($id);
+
+?>
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link rel="stylesheet" type="text/css" href="estilo_carro.css">
+  <link rel="stylesheet" type="text/css" href="standard.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome CSS -->  
+
+
+</head>
+
+<body>
+
+
+
+  <main>
+
+    <div class="container-fluid bg-danger px-0 fundo">
+        
+        <div class="row g-0 bg-info"> <!--BreadCrumbs-->
+            <div class="col-md-12 fundo">
+                <nav class="breadcrumb">
+                    <a class="breadcrumb-item" href="#home_page.html">Home</a>
+                    <a class="breadcrumb-item" href="#compra.html">Compra</a>
+                    <span class="breadcrumb-item active" aria-current="page">Carro</span>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row g-0 bg-info">
+            <div class="col-md-12 fundo_sombra">
+                <div class="row g-0 bg-info fundo_sombra">
+                    <div class="col-md-7">
+                        <div class="imagem_principal d-flex align-items-center justify-content-center">
+                            <div class="imagem_carro_principal d-flex align-items-center justify-content-center">
+                              <p>Imagem Carro </p>
+                            </div>
+                        </div>
+                        <div class="row d-flex align-items-center justify-content-center margem">
+                            <div class="col-md-2">
+                                <div class="imagem_secundaria d-flex align-items-center justify-content-center"><p>Imagem Carro </p></div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="imagem_secundaria d-flex align-items-center justify-content-center"><p>Imagem Carro </p></div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="imagem_secundaria d-flex align-items-center justify-content-center"><p>Imagem Carro </p></div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="imagem_secundaria d-flex align-items-center justify-content-center"><p>Imagem Carro </p></div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="imagem_secundaria d-flex align-items-center justify-content-center"><p>Imagem Carro </p></div>
+                            </div>
+                        </div>
+                        <div class="caracteristicas_anuncio">
+                          <p>Caracteristicas do Anuncio (ID Unico / Dia e Hora a que foi publicado) </p>
+                          <hr>
+                        </div>
+                        <div class="janela_descricao_carro">
+                            <div class="row">
+                              <div class="col-md-12 caracteristicas">
+                                <h7>Caracteristicas detalhadas do carro</h7>
+                              </div>
+                              <div class="col-md-3 descricoes">
+                                <br>
+                                <p>Marca</p>
+                                <br>
+                                <p>Modelo</p>
+                                <br>
+                                <p>Ano</p>
+                                <br>
+                                <p>Tipo de combustível</p>
+                                <br>
+                                <p>Tipo de caixa</p>
+                                <br>
+                                <p>Quilómetros</p>
+                                <br>
+                                <p>Cilindrada</p>
+                                <br>
+                                <p>Potência </p>
+                                <br>
+                              </div>
+                              <div class="col-md-3 margem_caixa ">
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center"><?= Html::encode($car->Marca) ?></label>
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center"><?= Html::encode($car->Modelo) ?></label>
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center"><?= Html::encode($car->Ano) ?></label>
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center"><?= Html::encode($car->Combustivel) ?></label>
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center"><?= Html::encode($car->Caixa) ?></label>
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center">Quilómetros</label>
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center">Cilindrada</label>
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center">Potência</label>
+                              </div>
+                              <div class="col-md-3 descricoes">
+                                <br>
+                                <p>Nº Portas</p>
+                                <br>
+                                <p>Lotação</p>
+                                <br>
+                                <p>Tração</p>
+                                <br>
+                                <p>Emissões CO2</p>
+                                <br>
+                                <p>IUC</p>
+                                <br>
+                                <p>Garantia</p>
+                                <br>
+                                <p>Matricula</p>
+                                <br>
+                                <p>Origem </p>
+                                <br>
+                              </div>
+                              <div class="col-md-3 margem_caixa_direita">
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center">Nº Portas</label>
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center">Lotação</label>
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center">Tração</label>
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center">Emissões CO2</label>
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center">IUC</label>
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center">Garantia</label>
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center">Matricula</label>
+                                <label for="disabledTextInput" class="form-label caixa_descricao d-flex align-items-center justify-content-center">Origem</label>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="janela_descricao_carro_vendedor">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <h2>Comentarios do vendedor quanto ao anuncio</h2>
+                              <div class="caixa_comentario">
+
+                              </div>
+                            </div>
+                          </div>
+                          
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="informacoes_carro">
+                        <div class="descricao_carro">
+                          <?php
+                            if ($car) {
+                              echo '<h2>' . htmlspecialchars($car->Marca . ' ' . $car->Modelo) . '</h2>';
+
+                              // You can display other information about the vehicle using $vehicle
+                              echo '<p>';
+                              echo '<i class="fas fa-tachometer-alt"></i> Ano: ' . htmlspecialchars($car->Ano) . ' ';
+                              echo '<i class="fas fa-tachometer-alt"></i> Combustivel: ' . htmlspecialchars($car->Combustivel) . ' ';
+                              echo '</p>';
+                              echo '<div class="d-flex align-items-center justify-content-center">';
+                              echo '<a href="' . Yii::$app->urlManager->createUrl(['site/carro', 'id' => $car->Id]) . '" class="preco d-flex align-items-center justify-content-center">' . htmlspecialchars($car->Preco) . '€</a>';
+                              echo '</div>';
+                          } else {
+                              echo '<p>Vehicle not found</p>';
+                          }
+                            ?>
+                        </div>
+                      </div>
+                      <div class="informacoes_stand">
+                          <h2>Nome</h2>
+                          <div class="imagem_stand d-flex align-items-center justify-content-center">
+                            <p>Imagem Stand-LOGO</p>
+                          </div>
+                          <div class="caracteristicas_stand">
+                            <h3>Características</h3>
+                          </div>
+                          <div class="labels_contactar">
+                            <div class="d-flex align-items-center justify-content-center">
+                              <label class="contactar d-flex align-items-center justify-content-center">Contactar (Telefone) </a>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center">
+                              <label class="contactar d-flex align-items-center justify-content-center">Contactar (Email) </a>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-0 bg-info"> <!-- Redes Sociais-->
+            <div class="col-md-12">
+                <div class="redes d-flex align-items-center">
+                    <h4>Segue-nos nas nossas redes!</h4>
+                </div>
+                <div class="icons d-flex align-items-center justify-content-end">
+                  <div class="butao_icon d-grid gap-2 d-md-block">
+                  <a href="#" class="btn icon-1" role="button">
+                <img src="<?= Yii::$app->request->baseUrl ?>/Assets/whatsapp_icon.svg" alt="WhatsApp" width="40" height="40">
+              </a>
+              <a href="https://www.instagram.com/autogtr_standonline" class="btn icon-2" role="button">
+                <img src="<?= Yii::$app->request->baseUrl ?>/Assets/instagram_icon.svg" alt="WhatsApp" width="40" height="40">
+              </a>
+              <a href="#" class="btn icon-3" role="button">
+                <img src="<?= Yii::$app->request->baseUrl ?>/Assets/twitter_icon.svg" alt="WhatsApp" width="40" height="40">
+              </a>
+              <a href="#" class="btn icon-4" role="button">
+                <img src="<?= Yii::$app->request->baseUrl ?>/Assets/facebook_icon.svg" alt="WhatsApp" width="40" height="40">
+              </a>
+                    </div>
+                  </div>
+                </div>   
+        </div>   
+
+        <div class="row g-0 bg-info"> <!-- Coluna de pesquisa rapida -->
+            <div class="col-md-12">
+              <div class="background_orange d-flex flex-column">
+                <h3>Marcas mais populares</h3>
+                <div class="row_hiperlinks">
+                  <a href="#" class="FIM">BMW</a>
+                  <a href="#" class="FIM">Audi</a>
+                  <a href="#" class="FIM">Mercedes</a>
+                  <a href="#" class="FIM">Opel</a>
+                  <a href="#" class="FIM">Porsche</a>
+                  <a href="#" class="FIM">Toyota</a>
+                  <a href="#" class="FIM">Dacia</a>
+                  <a href="#" class="FIM">Citroën</a>
+                  <a href="#" class="FIM">Peugeot</a>
+                  <a href="#" class="FIM">Renault</a>
+                </div>
+                <h3>Modelos de carros populares</h3>
+                <div class="row_hiperlinks">
+                  <a href="#" class="FIM">BMW Serie 1</a>
+                  <a href="#" class="FIM">Peugeot 2008</a>
+                  <a href="#" class="FIM">Peugeot 208</a>
+                  <a href="#" class="FIM">Renault Clio</a>
+                  <a href="#" class="FIM">Opel Corsa</a>
+                  <a href="#" class="FIM">Mercedes-Benz Classe A</a>
+                </div>
+                <h3>Os nossos stands</h3>
+                <div class="row_hiperlinks">
+                  <a href="#" class="FIM">Águas Santas</a>
+                  <a href="#" class="FIM">Sao João da Madeira</a>
+                  <a href="#" class="FIM">Marco de Canaveses</a>
+                  <a href="#" class="FIM">Bragança</a>
+                  <a href="#" class="FIM">Leiria</a>
+                  <a href="#" class="FIM">Sintra</a>
+                </div>
+                <h3>Distritos e Regiões</h3>
+                <div class="row_hiperlinks">
+                  <a href="#" class="FIM">Aveiro</a>
+                  <a href="#" class="FIM">Beja</a>
+                  <a href="#" class="FIM">Braga</a>
+                  <a href="#" class="FIM">Bragança</a>
+                  <a href="#" class="FIM">Castelo Branco</a>
+                  <a href="#" class="FIM">Coimbra</a>
+                  <a href="#" class="FIM">Évora</a>
+                  <a href="#" class="FIM">Faro</a>
+                  <a href="#" class="FIM">Guarda</a>
+                  <a href="#" class="FIM">Leiria</a>
+                  <a href="#" class="FIM">Lisbon</a>
+                  <a href="#" class="FIM">Portalegre</a>
+                  <a href="#" class="FIM">Porto</a>
+                  <a href="#" class="FIM">Santarém</a>
+                  <a href="#" class="FIM">Setúbal</a>
+                  <a href="#" class="FIM">Viana do Castelo</a>
+                  <a href="#" class="FIM">Vila Real</a>
+                  <a href="#" class="FIM">Viseu</a>
+                  <a href="#" class="FIM">Azores</a>
+                  <a href="#" class="FIM">Madeira</a>
+              </div>
+              </div>
+            </div>
+        </div>
+
+    </div>
+
+
+  </main>
+
+
+
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>

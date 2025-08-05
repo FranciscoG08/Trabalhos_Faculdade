@@ -1,0 +1,145 @@
+/*BODY*/
+
+.fundo {
+
+    background: rgb(244, 211, 94);
+    background: linear-gradient(90deg, rgba(244, 211, 94, 1) 40%, rgba(250, 240, 202, 1) 50%, rgba(244, 211, 94, 1) 60%);
+    height: 100vh;
+}
+
+.box {
+    background-color: lightslategrey;
+    border-color: lightslategrey;
+    font-weight: bolder;
+    color: blue;
+    text-align: left;
+    padding: 20px 30px;
+    font-size: 10px;
+    border-radius: 10px;
+    margin-left: 13px;
+}
+
+.anuncie{
+
+    margin-top: 20px;
+    margin-bottom: 50px;
+    background-color: #0D3B66;
+    width: 400px;
+    height: 140px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    color: #FAF0CA;
+    font-weight: bold !important;
+
+}
+
+.confie{
+
+    margin-top: 20px;
+    margin-bottom: 50px;
+    background-color: #0D3B66;
+    width: 320px;
+    height: 100px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    color: #FAF0CA;
+    font-weight: bold !important;
+
+}
+
+h1 {
+    justify-content: center;
+    align-items: center;
+
+}
+
+.opcoes {
+    position: relative;
+    background-color: #FAF0CA;
+    color: #0D3B66;
+    width: 80%;
+    height: 40px;
+    top: 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    margin-left: 15px;
+    margin-right: 315px;
+    text-indent: 15px;
+    font-size: 20px;
+    outline: none;
+    box-shadow: none;
+    border: none
+}
+
+.largura {
+    position: relative;
+    width: 30%;
+    height: 40px;
+    top: 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    margin-left: 15px;
+    margin-right: 315px;
+    text-indent: 15px;
+}
+
+.largura_1 {
+    margin-right: 3.4cm;
+}
+
+select.opcoes {
+
+    background-image: url('Assets/chevron-down.svg');
+    background-size: 2vh;
+    background-repeat: no-repeat;
+    background-position: right 3vh center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+}
+
+/*Fotos do carro*/
+.textt {
+    color: #0D3B66;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/*Botao_Enviar*/
+.botaoEnviar {
+    background-color: #F95738;
+    border: 0.001cm solid #EE964B;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);
+    ;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 30px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.distancia_botao {
+    padding-top: 1cm;
+}
+
+/*Nossa fuça*/
+
+.funcionarios {
+
+    width: 190px;
+    height: 190px;
+    margin: auto;
+
+}
+
+.botaoanim:hover {
+    /* < Hover: Animação do Botao Login > */
+    text-decoration: underline #FAF0CA;
+    animation: efeito_cor_encontre 1s ease;
+}
+
+main{
+    padding-top: 1.9cm;
+}

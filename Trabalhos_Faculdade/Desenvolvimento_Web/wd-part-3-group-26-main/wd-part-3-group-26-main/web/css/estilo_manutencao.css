@@ -1,0 +1,16 @@
+.fundo_animado{
+
+    background: rgb(244,211,94);
+    background: linear-gradient(90deg, rgba(244,211,94,1) 40%, rgba(250,240,202,1) 50%, rgba(244,211,94,1) 60%);
+    height:95.5vh;
+    width:100%;
+
+}
+
+.gif_animado{
+
+   border-radius: 10px;
+   box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.5);
+   margin-top: 150px;
+
+}

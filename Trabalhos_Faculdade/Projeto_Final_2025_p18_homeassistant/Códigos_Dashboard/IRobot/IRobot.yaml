@@ -1,0 +1,21 @@
+views:
+  - sections:
+      - type: grid
+        cards:
+          - type: custom:vacuum-card
+            entity: vacuum.roomba_piso
+          - type: custom:vacuum-card
+            entity: vacuum.roomba_cave
+      - type: grid
+        cards:
+          - type: custom:vacuum-card
+            entity: vacuum.roomba_sala
+          - type: custom:vacuum-card
+            entity: vacuum.roomba_bunker
+      - type: grid
+        cards:
+          - type: custom:vacuum-card
+            entity: vacuum.braava_sala
+    type: sections
+    max_columns: 4
+    cards: []

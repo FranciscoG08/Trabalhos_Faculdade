@@ -1,0 +1,29 @@
+ # CONVERSÕES PARA OS GRÁFICOS
+- sensor:
+    - name: "Consumo da Casa em kW"
+      unit_of_measurement: "kW"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.consumo_da_casa_novo') | float(0) / 1000) | round(2) }}
+
+    - name: "Produção Solar em kW"
+      unit_of_measurement: "kW"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.solar_total') | float(0) / 1000) | round(2) }}
+
+    - name: "EV16 Power em kW"
+      unit_of_measurement: "kW"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.ev_16a_power') | float(0) / 1000) | round(2) }}
+
+    - name: "EV32 Power em kW"
+      unit_of_measurement: "kW"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.ev_32a_power') | float(0) / 1000) | round(2) }}

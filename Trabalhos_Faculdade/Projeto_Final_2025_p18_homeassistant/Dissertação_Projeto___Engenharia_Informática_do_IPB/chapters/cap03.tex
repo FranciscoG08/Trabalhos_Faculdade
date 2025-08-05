@@ -1,0 +1,270 @@
+\chapter{Análise de Requisitos}\label{cap:metodology}
+
+Serve o presente capitulo para demonstrar todos os requisitos ao longo do desenvolvimento deste projeto.
+
+
+\section{Modelação do Sistema de Automação Residencial}
+
+Para iniciar o desenvolvimento do projeto, foi realizado um levantamento de todos os dispositivos, seguido do desenho de um diagrama de comunicação entre eles. A comunicação ocorre exclusivamente pela rede Wi-Fi local, garantindo conectividade direta e privada. A arquitetura do sistema e as conexões entre os dispositivos são mostradas na Figura~\ref{fig:Diagram_HA_2.png}, que integra produção e armazenamento de energia, carregamento de veículos elétricos, ar-condicionado, vigilância, controlo de estores, sensores ambientais \textit{Netatmo} e monitorização de energia, centralizados por meio da plataforma \gls{HA}. Para suportar essa infraestrutura, o \gls{HA} foi instalado numa máquina virtual no \textit{VirtualBox}, criando assim um ambiente controlado e isolado para testes e integração dos dispositivos. Esta abordagem proporcionou maior flexibilidade, facilidade de backup e segurança no processo de desenvolvimento do sistema de automação residencial.
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{images/Diagram_HA_2.png}
+    \caption{Diagrama do cenário de aplicação}
+    \label{fig:Diagram_HA_2.png}
+\end{figure}
+
+
+\subsection{Visão Geral}
+
+O diagrama representa um sistema integrado de \textbf{produção, monitorização e gestão de energia}, \textbf{ar condicionado}, \textbf{carregamento de veículos elétricos}, \textbf{videovigilância} e \textbf{automatização residencial}, centralizado no \gls{HA}.
+
+\vspace{1em}
+\subsection{Produção e Armazenamento de Energia}
+
+À esquerda do diagrama encontram-se os módulos fotovoltaicos \textit{PV 1}, \textit{PV 2} e \textit{PV 3} (\textit{AXITEC}), responsáveis por captar a energia solar. Estes painéis estão ligados ao \textit{inversor - SUN2000-Master} (modelo \textit{Huawei}), que converte a corrente contínua (DC) gerada pelos painéis em corrente alternada (AC), utilizável na rede elétrica da casa.
+
+O \textit{inversor - SUN2000-Master} está também ligado à bateria - \textit{Luna2000}, permitindo armazenar o excesso de energia solar para consumo posterior. Adicionalmente, este inversor está ligado à rede \textit{elétrica}, permitindo consumir energia da rede ou injetar excedente.
+
+O sistema conta ainda com um inversor - \textit{SUN2000-Slave}, integrado na arquitetura para balanceamento e controlo eficiente. Toda esta infraestrutura é monitorizada via a integração \textit{Huawei}, possibilitando uma gestão centralizada dos fluxos energéticos.
+
+\vspace{1em}
+\textbf{Monitorização de Consumos}
+
+Vários dispositivos \textit{Shelly EM} foram instalados para monitorizar consumos elétricos específicos. Um destes dispositivos mede o consumo geral da casa, outros monitorizam equipamentos individuais como:
+
+\begin{itemize}
+  \item Carregador de veículos elétricos \textit{Porsche};
+  \item Bomba de calor \textit{(Daikin EABX-D6V)};
+  \item Bomba de A.Q.S \textit{(Daikin EKHHP500AA2V3)};
+  \item Carregador de veículos elétricos \textit{Huawei SCharger};
+  \item \textit{Reolink} NVR e Câmaras;
+\end{itemize}
+
+A integração com a \textit{Shelly Integration} permite visualizar em tempo real os consumos e criar automações inteligentes, otimizando a utilização da energia produzida.
+
+Além disso, um módulo \textit{Shelly 2.5} está ligado aos \textit{Blinds} (estores), permitindo a sua automação com base em condições como a produção solar, temperatura ou hora do dia. Através do \gls{HA}, os estores podem ser abertos ou fechados automaticamente para otimizar o conforto térmico e/ou a eficiência energética da casa.
+
+\textbf{Aquecimento e Águas Quentes}
+
+Os equipamentos de climatização \textit{Daikin} incluem a \textit{Heat Pump} para aquecimento e a \textit{A.Q.S Pump} para águas quentes sanitárias. Ambos estão integrados no sistema via \textit{DAIKIN Integration}, o que permite uma gestão eficiente, aproveitando preferencialmente a energia solar para funcionamento destes equipamentos.
+
+\vspace{1em}
+\textbf{Carregadores de Veículos Elétricos}
+
+A arquitetura inclui dois carregadores:
+\begin{itemize}
+  \item Carregador \textit{Porsche} (carregador móvel);
+  \item \textit{Huawei SCharger (modelo SCharger-7KS-S0);}
+\end{itemize}
+
+Estes carregadores estão ligados à rede da casa e monitorizados por dispositivos \textit{Shelly EM}, permitindo controlar e automatizar os carregamentos com base em horários de tarifa reduzida ou excedente solar.
+
+\vspace{1em}
+\textbf{Videovigilância}
+
+O sistema de segurança é assegurado por \textit{câmaras} ligadas ao \textit{Reolink NVR}, que permite gravação e monitorização contínua. A integração via \textit{Reolink Integration} disponibiliza visualizações e alertas centralizados no \gls{HA}.
+
+\vspace{1em}
+\textbf{Meteorologia Inteligente e Controlo Ambiental}
+
+O sistema inclui sensores da \textit{Netatmo}, integrados via \textit{Netatmo Integration}, nomeadamente:
+
+\begin{itemize}
+  \item \textit{Smart Weather Station – exterior};
+  \item \textit{Smart Weather Station – interior;}
+  \item \textit{Rain gauge;}
+  \item \textit{Wind gauge;}
+  \item \textit{Smart Indoor Camera;}
+\end{itemize}
+
+Estes dispositivos permitem recolher dados sobre temperatura, humidade, qualidade do ar, precipitação e presença no interior da casa. Esta informação é utilizada para ajustar automaticamente equipamentos como a climatização, estores ou alertar o utilizador de condições ambientais adversas.
+
+\vspace{1em}
+\textbf{Limpeza Autónoma}
+
+O sistema integra ainda aspiradores inteligentes \textit{iRobot}, conectado via \textit{iRobot Integration}, que permite iniciar sessões de limpeza automáticas ou programadas com base em condições específicas, como ausência de pessoas na casa ou dias de maior produção solar.
+
+
+
+
+\section{Equipamentos}
+
+Nas subseções seguintes são descritas as funções e detalhes dos equipamentos.\
+
+A \textit{Daikin EKHHP500AA2V3} é uma bomba de calor que produz água quente sanitária, onde a energia do ar exterior é utilizada para a aquecer. Isto torna-a mais eficiente e sustentável do que os sistemas tradicionais elétricos ou a gás. A \textit{Daikin EABX-D6V}, por outro lado, é uma unidade interior de bomba de calor que é utilizada para aquecimento, água quente sanitária (AQS) e sistemas de arrefecimento.
+
+Esta unidade transfere energia térmica para o sistema de aquecimento ou AQS através da energia térmica da unidade exterior e permite a produção de água quente sanitária. Para vigilância, a \textit{Reolink NVR} é um gravador de vídeo em rede que suporta até 36 câmaras IP ao mesmo tempo, e também permite monitorizar e gerir as câmaras, tornando-o ideal para instalações de vigilância de grande dimensão.
+
+No entanto, a \textit{Reolink RLC-811A} é uma câmara de segurança IP adequada para uso exterior, mas que também pode ser útil em interiores. É alimentada por PoE, tornando a instalação fiável e eficiente. No campo da energia solar, a \textit{Huawei SUN2000} é um inversor solar residencial com uma potência nominal de 5 kW, adequado para instalações residenciais ou de pequena escala. Oferece elevada eficiência e funciona com baterias, incluindo ainda monitorização inteligente. A \textit{Huawei LUNA2000} é uma bateria modular de iões de lítio que armazena o excesso de energia solar, permitindo o uso da energia armazenada durante a noite ou quando a produção é reduzida, aumentando assim o autoconsumo de energia e reduzindo a dependência da rede elétrica.
+
+Os \textit{AXITEC AXIpremium XL HL} são painéis solares fotovoltaicos com células monocristalinas de alta eficiência e tecnologia half-cell. Estes painéis têm melhor desempenho em condições de sombra parcial, são mais duráveis e adequados para instalações que priorizam potência e eficiência. Para mobilidade elétrica, o \textit{Huawei SCharger} é um carregador de 7.2 kW para veículos elétricos que permite um carregamento rápido e seguro, integrando-se facilmente com sistemas fotovoltaicos para priorizar a energia solar no carregamento.
+
+O \textit{Porsche Mobile Charger Connect} é um carregador inteligente e portátil para veículos elétricos que permite o carregamento em casa ou em diferentes locais através de tomadas domésticas ou industriais. Pode ser utilizado como uma solução móvel ou instalado permanentemente, incluindo ainda conectividade de rede para gestão remota e integração com sistemas de casa inteligente.
+
+Para automação e controlo, foram utilizados dispositivos do ecossistema \textit{Shelly}. O \textit{Shelly 1PM Gen4} foi instalado para controlar o portão da garagem, permitindo a sua abertura e fecho de forma remota através da interface do \gls{HA}. Adicionalmente, foram instalados vários módulos \textit{Shelly 2.5} para o controlo dos estores elétricos, permitindo tanto o controlo manual como automatizado, totalmente integrado no painel de controlo.
+
+Para o controlo climático interior, foram instalados cinco termóstatos inteligentes com fios \textit{TADO}. Estes dispositivos permitem a monitorização e regulação em tempo real da temperatura e humidade em várias divisões, oferecendo modos de aquecimento e arrefecimento configuráveis e integração total com o sistema central de automação.
+
+Por fim, o sistema de monitorização ambiental baseia-se em quatro dispositivos da \textit{Netatmo}: a \textit{Netatmo Weather Station}, \textit{a Netatmo Smart Indoor Camera}, \textit{o Netatmo Wind Gauge e o Netatmo Rain Gauge}. Este conjunto permite a monitorização contínua da pressão atmosférica, níveis de ruído e concentração de dióxido de carbono, melhorando o conforto do utilizador e a gestão da qualidade do ar, com visualização dos dados no painel principal.
+
+
+
+\section{Requisitos do Home Assistant e Hardware}
+
+Para executar o \gls{HA}, os requisitos mínimos de hardware são os seguintes , dependendo do método de instalação:
+
+\begin{itemize}
+    \item \textbf{Máquina virtual (VM):}
+    \begin{itemize}
+        \item Pelo menos 2\,CPU cores;
+        \item 2\,GB RAM (4\,GB são recomendados para uma melhor performance);
+        \item 32\,GB de espaço do disco;
+        \item Adaptador de rede com acesso à internet.
+    \end{itemize}
+    
+    \item \textbf{Raspberry Pi:}
+    \begin{itemize}
+        \item Raspberry Pi 4 (2\,GB mínimo, 4\,GB ou 8\,GB recomendado);
+        \item cartão microSD (32\,GB minimo, ou SSD via USB para maior fiabilidade.);
+        \item Power supply (3A USB-C official recomendado);
+        \item Ligação Ethernet ou Wi-Fi.
+    \end{itemize}
+\end{itemize}
+
+
+\section{Dashboards a Desenvolver}
+
+Com o objetivo de garantir o cumprimento de todos os requisitos funcionais definidos, foi desenvolvido um conjunto de dashboards temáticos, cada um focado numa funcionalidade específica do sistema de automação residencial. Estes dashboards permitem uma visualização clara e intuitiva do estado dos dispositivos, bem como o controlo direto sobre os mesmos.
+
+Entre os dashboards a implementar, destacam-se os seguintes:
+\begin{itemize}
+    \item \textbf{Dashboard Principal}: servirá como ecrã de entrada e terá como função apresentar, de forma resumida e centralizada, as informações mais relevantes dos vários sistemas integrados, como temperatura ambiente, consumo energético atual, estado das câmaras, entre outros.
+    \item \textbf{Dashboard Energia}: permitirá a monitorização detalhada da produção e consumo energético, integrando dados provenientes do inversor solar, baterias, carregadores de veículos elétricos, e dispositivos \textit{Shelly}.
+    \item \textbf{Dashboard Bombas}: focada na gestão das bombas de calor e do sistema de AQS (Águas Quentes Sanitárias), com possibilidade de ajuste de temperaturas e modos de operação em tempo real.
+    \item \textbf{Dashboard Câmaras}: dedicada ao acompanhamento em tempo real das câmaras de segurança, permitindo uma visão geral de todas as zonas exteriores da casa.
+    \item \textbf{Dashboard Estores}: facilitará o controlo manual e automático de todos os estores elétricos da habitação, com indicação da posição atual de cada um.
+    \item \textbf{Dashboard Netatmo}: mostrará dados de sensores ambientais (temperatura, humidade, pressão atmosférica, ruído, CO\textsubscript{2}), recolhidos pelos dispositivos \textit{Netatmo}, promovendo o conforto e qualidade do ar interior.
+    \item \textbf{Dashboard iRobot}: mostrará todos os dispositivos \textit{iRobot} que foram integrados.
+\end{itemize}
+
+Cada dashboard será desenhada com foco na usabilidade, garantindo uma interface limpa, responsiva e adaptada às necessidades do utilizador, promovendo um controlo total da casa inteligente a partir de um único sistema integrado.
+
+\newpage
+
+\section{Requisitos Funcionais}
+
+\begin{table}[h!]
+\centering
+\resizebox{!}{11.5cm}{
+\rowcolors{2}{gray!10}{white}
+\begin{tabularx}{\textwidth}{|X|p{2.5cm}|>{\raggedright\arraybackslash}X|p{2.1cm}|p{2.1cm}|}
+\hline
+\textbf{Funcionalidade} & \textbf{Sensor} & \textbf{Entidade} & \textbf{Integração} & \textbf{Dashboard} \\
+\hline
+Verificar temperatura da sala & Tado sala & sensor. sala\_temperatura & Tado & Main e TADO \\
+
+Verificar humidade da sala & Tado sala & sensor. sala\_humidade & Tado & Main e TADO \\
+
+Verificar temperatura da suite & Tado suite & sensor. suite\_temperatura & Tado & Main e TADO \\
+
+Verificar humidade da suite & Tado suite & sensor. suite\_humidade  & Tado & Main e TADO \\
+
+Verificar temperatura do quarto RC & Tado quarto RC & sensor. quartorc\_temperatura & Tado & Main e TADO \\
+
+Verificar humidade do quarto RC & Tado quarto RC & sensor. quartorc\_humidade & Tado & Main e TADO \\
+
+Verificar temperatura do quarto Nascente & Tado quarto Nascente & sensor. quartonascente\_temperatura & Tado & Main e TADO \\
+
+Verificar humidade do quarto Nascente & Tado quarto Nascente & sensor. quartonascente\_humidade & Tado & Main e TADO \\
+
+Verificar temperatura do quarto Poente & Tado quarto Poente & sensor. quartopoente\_temperatura & Tado & Main e TADO \\
+
+Verificar humidade do quarto Poente & Tado quarto Poente & sensor. quartopoente\_humidade & Tado & Main e TADO \\
+
+Verificar temperatura exterior & Netatmo-Exterior & sensor. netatmo\_1piso\_ netatmo\_ exterior\_temperature & Netatmo & Main e  Netatmo \\
+
+Verificar humidade exterior & Netatmo-Exterior & sensor. netatmo\_1piso\_ netatmo\_ exterior\_humidity & Netatmo & Main e   Netatmo \\
+
+Verificar precipitação atual & Netatmo-Exterior & sensor. netatmo \_1piso\_rain\_ gauge\_precipitation & Netatmo & Main e Netatmo \\
+
+Verificar precipitação total diária & Netatmo-Exterior & sensor. netatmo \_1piso\_rain\_ gauge\_precipita-tion\_today & Netatmo & Main e Netatmo \\
+
+Verificar velocidade do vento & Netatmo-Anemómetro Inteligenter & sensor. netatmo \_1piso\_anenometer\_ wind\_speed & Netatmo & Main e Netatmo \\
+
+Verificar direção do vento & Netatmo-Anemómetro Inteligente & sensor. netatmo \_1piso\_anenometer\_ wind\_direction & Netatmo & Main e Netatmo \\
+
+Abrir/Fechar portao da Garagem & Shelly-Garage\_ Door & climate. altherma\_leaving\_ water\_tempera-ture & Shelly & Main \\
+
+Verificar o estado e power da bateria & Huawei-State of capacity & sensor.batteries\_ state\_of\_ capacity & Huawei & Main e Energy \\
+
+Verificar produção solar & Huawei (...) & sensor.solar\_total & Huawei & Main e Energy \\
+
+Verificar power da rede & Shelly-Medidor Geral & sensor.rede\_power & Shelly & Main e Energy \\
+
+
+\hline
+\end{tabularx}
+}
+\caption{Funções, sensores e entidades no sistema}
+\end{table}
+
+
+\begin{table}[h!]
+\centering
+\resizebox{!}{11cm}{
+\rowcolors{2}{gray!10}{white}
+\begin{tabularx}{\textwidth}{|X|p{2.5cm}|>{\raggedright\arraybackslash}X|p{2.1cm}|p{2.1cm}|}
+\hline
+\textbf{Funcionalidade} & \textbf{Sensor} & \textbf{Entidade} & \textbf{Integração} & \textbf{Dashboard} \\
+\hline
+Verificar consumo da bomba AQS & Shelly-Bomba\_AQS & sensor.bomba\_aqs\_fil-tered\_power & Shelly & Main e Energy \\
+
+Verificar consumo da bomba de calor & Shelly-Bomba\_Calor & sensor.bomba\_calor\_ filtered\_power & Shelly & Main e Energy \\
+
+Verificar consumo do EV16 & Shelly-EV\_16A & sensor.ev\_16\_ filtered\_power & Shelly & Main e Energy \\
+
+Verificar consumo do EV32 & Shelly-EV\_32A & sensor.ev\_32\_ filtered\_power & Shelly & Main e Energy \\
+
+Verificar estado do robo Roomba\_Sala & iRobot-Roomba\_Sala & vacuum.roomba\_sala & iRobot & Main e iRobot \\
+
+Verificar estado do robo Braava\_Sala & iRobot-Braava\_Sala & vacuum.braava\_sala & iRobot & Main e iRobot \\
+
+Verificar estado do robo Roomba\_Piso & iRobot-Roomba\_Piso & vacuum.roomba\_piso & iRobot & Main e iRobot \\
+
+Verificar estado do robo Roomba\_Bunker & iRobot-Roomba\_Bunker & vacuum.roomba\_bunker & iRobot & Main e iRobot \\
+
+Verificar estado do robo Roomba\_Cave & iRobot-Roomba\_Cave & vacuum.roomba\_cave & iRobot & Main e iRobot \\
+
+Baixar/Subir estore do quarto Nascente & Shelly-Quarto\_Nas-cente & cover.quarto\_nascente & Shelly & Blinds \\
+
+Monitorizar a camara 1 & Reolink-Camara1 & camera.camara1\_trans-parente & Reolink & NVR \\
+
+Monitorizar a camara da frente & Reolink-Frente-1 & camera. frente\_1\_trans-parente & Reolink & Main e NVR \\
+
+Monitorizar a camara da garagem & Reolink-Garagem-1 & camera. garagem\_8\_transparente & Reolink & Main e NVR \\
+
+Monitorizar a camara das escadas & Reolink-Escadas-4 & camera.escadas\_4\_ transparente & Reolink & NVR \\
+
+Monitorizar a camara da piscina & Reolink-Piscina-5 & camera.piscina\_5\_ transparente & Reolink & NVR \\
+
+Monitorizar a camara da platibanda & Reolink-Platibanda-5 & camera.platibanda\_6\_ transparente & Reolink & NVR \\
+
+Monitorizar a camara da rampa norte & Reolink-Rampa-Norte-3 & camera.rampa\_norte\_ 3\_transparente & Reolink & NVR \\
+
+Monitorizar a camara da rampa sul & Reolink-Rampa-Sul-2 & camera.rampa\_sul\_2\_ transparente & Reolink & NVR \\
+
+Monitorizar a camara do escritório & Netatmo-Escritório & camera.netatmo\_wel-come & Netatmo & NVR e Netatmo \\
+
+Verificar temperatura da bomba de calor & Altherma-Leaving Water Temperature & climate.altherma\_lea-ving\_water\_tempera-ture & DAIKIN & Main e Pumps \\
+
+Verificar o estado da bomba de calor & Altherma-Leaving Water Offset & climate.altherma\_lea-ving\_water\_offset & DAIKIN & Main e Pumps \\
+
+
+\hline
+\end{tabularx}
+}
+\caption{Funções, sensores e entidades no sistema}
+\end{table}

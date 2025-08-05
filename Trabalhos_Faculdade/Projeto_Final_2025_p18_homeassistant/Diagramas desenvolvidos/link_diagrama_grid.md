@@ -1,0 +1,1 @@
+[Abrir Diagrama HA](https://drive.google.com/file/d/1RMIX7xTwS165b1dxv8skY-7lK8UPWCPO/view)

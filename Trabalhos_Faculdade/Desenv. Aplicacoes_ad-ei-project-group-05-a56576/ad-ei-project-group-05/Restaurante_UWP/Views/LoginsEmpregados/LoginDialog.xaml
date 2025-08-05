@@ -1,0 +1,35 @@
+﻿<ContentDialog
+    x:Class="Restaurante_UWP.Views.Empregados.LoginDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Restaurante_UWP.Views.Empregados"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Login"
+    PrimaryButtonText="Login"
+    SecondaryButtonText="Cancelar"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    <StackPanel>
+     <TextBox x:Name="txtUsername" Header="Username"
+          Text="{x:Bind EmpregadoViewModel.Empregado.Nome, Mode=TwoWay}"/>
+     <PasswordBox x:Name="txtPassword" Header="Password"
+              Password="{x:Bind EmpregadoViewModel.Empregado.Password, Mode=TwoWay}"/>
+     <Border Background="Red" BorderBrush="Black" BorderThickness="1" Margin="0,10"
+             Padding="5"
+         Visibility="{x:Bind EmpregadoViewModel.ShowError,Mode=OneWay}">
+         <Grid>
+             <Grid.ColumnDefinitions>
+                 <ColumnDefinition Width="48"/>
+                 <ColumnDefinition/>
+             </Grid.ColumnDefinitions>
+             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE1E0;" Foreground="White"/>
+             <TextBlock Grid.Column="1" Text="Login failed" Foreground="White"
+                  VerticalAlignment="Center"
+                  Margin="-8,0,0,0"/>
+         </Grid>
+     </Border>
+ </StackPanel>
+</ContentDialog>

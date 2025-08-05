@@ -1,0 +1,84 @@
+\chapter{Contexto e Tecnologias/Ferramentas}\label{cap:conceptual}
+
+\section{Estado da Arte}
+
+A revisão da literatura destaca as principais soluções e tecnologias atualmente disponíveis na área de automação residencial:
+
+\subsection*{Plataformas de Automação Residencial}
+\begin{itemize}
+    \item \textit{Home Assistant}: Plataforma \textit{open source} amplamente utilizada para automação residencial, conhecida pela sua flexibilidade e suporte a uma vasta gama de dispositivos e serviços.
+    \item \textit{SmartThings}: Plataforma da Samsung que permite integração com dispositivos inteligentes, mas com maior dependência de serviços baseados em nuvem.
+    \item \textit{OpenHAB}: Outra solução \textit{open-source} focada em integrar dispositivos diversos, mas com uma curva de aprendizado mais acentuada.
+\end{itemize}
+
+\subsection*{Tecnologias Subjacentes}
+\begin{itemize}
+    \item \textbf{Protocolos de Comunicação}: Tecnologias como \textit{Zigbee}, \textit{Z-Wave} e \textit{MQTT} são amplamente utilizadas para conectar dispositivos de forma confiável e eficiente.
+    \item \textbf{Assistentes Virtuais}: A integração com assistentes como a Alexa permite o controlo por comandos de voz, aumentando a usabilidade e acessibilidade do sistema.
+\end{itemize}
+
+
+\section{Tecnologias e Ferramentas Utilizadas}
+
+\subsection*{Linguagem YAML}
+
+A linguagem \gls{YAML} será utilizada para configurar e definir as automações e integrações do \gls{HA}. 
+As principais características que justificam sua escolha incluem:
+
+\begin{itemize}
+    \item \textbf{Simplicidade e Legibilidade:} a sintaxe intuitiva e minimalista facilita a criação de configurações complexas.
+    \item \textbf{Estrutura Hierárquica:} ideal para definir dependências e relações entre dispositivos e automações.
+    \item \textbf{Compatibilidade com o Home Assistant:} \gls{YAML} é a linguagem padrão para configurar o \gls{HA}, sendo amplamente documentada e suportada.
+\end{itemize}
+
+\subsection*{Comunicação via Wi-Fi}
+
+Os dispositivos inteligentes utilizados no sistema (como medidores de consumo \textit{Shelly}, câmaras, termostatos, estores, entre outros) comunicam-se entre si e com o \gls{HA} através da rede Wi-Fi da casa. Esta tecnologia desempenha um papel fundamental por:
+
+\begin{itemize}
+    \item  Eliminar a necessidade de cabos adicionais;
+    \item Permitir controlo e monitorização remotos dos dispositivos;
+    \item Facilitar a integração com a infraestrutura de rede já existente.
+\end{itemize}
+
+O uso do Wi-Fi como meio de comunicação garante uma instalação flexível, reduz os custos com infraestrutura e torna possível o acesso aos dados e controlo da casa inteligente a partir de qualquer lugar com ligação à Internet.
+
+\section{Vantagens/Desvantagens do Home Assistant}
+
+As principais vantagens do \gls{HA} incluem:
+
+\begin{itemize}
+    \item \textbf{Código Aberto:} Permite personalizações avançadas e liberdade para adaptações específicas.
+    \item \textbf{Compatibilidade Ampla:} Suporte para milhares de dispositivos e protocolos, como \textit{Zigbee, Z-Wave e MQTT}.
+    \item \textbf{Autonomia Local:} Funciona de forma independente da nuvem, priorizando privacidade e segurança.
+    \item \textbf{Flexibilidade:} Possibilita automações complexas e personalizadas, adaptadas às necessidades.
+    \item \textbf{Custo-Benefício:} Gratuito e com uma vasta comunidade de suporte, reduzindo custos de manutenção.
+    \item \textbf{Atualizações Constantes:} A comunidade ativa proporciona melhorias regulares e novos recursos.
+\end{itemize}
+
+As principais desvantagens do \gls{HA} incluem:
+
+\begin{itemize}
+    \item \textbf{Grau de dificuldade inicial:} Pode ser desafiador para iniciantes devido à necessidade de configurar arquivos \gls{YAML} e aprender conceitos técnicos.
+    \item \textbf{Dependência de Hardware Local:} Requer um dispositivo dedicado (como \textit{Raspberry Pi} ou similar) para operação, o que pode aumentar os custos iniciais.
+    \item \textbf{Complexidade de Configuração:} Algumas integrações e automações avançadas podem ser difíceis de implementar sem conhecimento técnico prévio.
+    \item \textbf{Manutenção Regular:} Atualizações frequentes podem introduzir mudanças que exigem ajustes na configuração existente.
+    \item \textbf{Desempenho em Sistemas Grandes:} Em implementações extensas, o desempenho pode ser afetado sem hardware adequado.
+\end{itemize}
+
+
+\section{Plataformas Relacionadas}
+
+\subsection{OpenHAB}
+
+O \textit{OpenHAB} é uma plataforma \textit{open-source} dedicada à automação residencial, semelhante ao \gls{HA}. Foi uma das primeiras soluções deste género a surgir no mercado, com uma arquitetura modular que suporta diversos protocolos de comunicação, como o \textit{Z-Wave}, \textit{Zigbee} e \textit{MQTT}. No entanto, apresenta uma curva de aprendizagem mais acentuada, sendo necessário um conhecimento técnico mais aprofundado para realizar configurações e integrações.
+
+Em comparação com o projeto desenvolvido, o \textit{OpenHAB} revela-se menos acessível para novos utilizadores e com uma interface menos moderna. Apesar disso, ambos partilham o objetivo de integrar e controlar dispositivos inteligentes de forma centralizada, mantendo o funcionamento local e sem depender de serviços na nuvem. O \gls{HA}, no entanto, destaca-se pela comunidade ativa e pela facilidade na personalização de dashboards, o que foi amplamente explorado neste trabalho.
+
+
+\subsection{Domoticz}
+
+O \textit{Domoticz} é uma plataforma leve para automação residencial, ideal para dispositivos com poucos recursos, como o \textit{Raspberry Pi}. Foca-se em fornecer funcionalidades básicas de controlo e monitorização de sensores, atuadores, luzes e outras entidades. A sua interface gráfica é simples, mas menos atrativa e intuitiva quando comparada ao \gls{HA}.
+
+No contexto deste projeto, o Domoticz apresenta limitações em termos de integração com equipamentos modernos como câmaras \textit{Reolink}, bombas de calor \textit{Daikin}, sensores \textit{Netatmo} ou aspiradores \textit{iRobot}, o que o coloca em desvantagem em cenários mais complexos. Ainda assim, tal como o \gls{HA}, permite automação local e contribui para a independência de soluções baseadas em cloud. Para casos mais simples ou com restrições de hardware, pode ser uma opção viável.
+

@@ -1,0 +1,40 @@
+# Saída de casa Solar
+- sensor:
+    - name: "PV1 Master Power"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.inverter_pv_1_current') | float(0) * states('sensor.inverter_pv_1_voltage') | float(0)) | round(2) }}
+
+    - name: "PV2 Master Power"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.inverter_pv_2_current') | float(0) * states('sensor.inverter_pv_2_voltage') | float(0)) | round(2) }}
+
+    - name: "PV1 Slave Power"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.inverter_pv_1_voltage_2') | float(0) * states('sensor.inverter_pv_1_current_2') | float(0)) | round(2) }}
+
+# Soma dos 2 inversores
+    - name: "Solar Total"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% set a = states('sensor.inverter_input_power') | float(0) %}
+        {% set b = states('sensor.inverter_input_power_2') | float(0) %}
+        {{ a + b }}
+        
+    - name: "Soma dos 3 Solares"
+      unit_of_measurement: "W"
+      state: >
+          {% set s1 = states('sensor.pv1_master_power') | float(0) %}
+          {% set s2 = states('sensor.pv1_slave_power') | float(0) %}
+          {% set s3 = states('sensor.pv2_master_power') | float(0) %}
+          {{ (s1 + s2 + s3) | round(2) }}

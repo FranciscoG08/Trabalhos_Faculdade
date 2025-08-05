@@ -1,0 +1,4 @@
+# Consumo diario bomba aqs
+daily_bomba_aqs_energy:
+  source: sensor.bomba_aqs_energy
+  cycle: daily

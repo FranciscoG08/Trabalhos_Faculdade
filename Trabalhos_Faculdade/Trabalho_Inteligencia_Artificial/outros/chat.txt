@@ -1,0 +1,99 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.svm import SVR
+from sklearn.metrics import mean_squared_error
+from scipy.stats import zscore
+
+# 1) Carregar o dataset
+df = pd.read_csv("dataset.csv")  # Substitua pelo seu caminho de arquivo
+print(df.sample(4))  # Exemplo de dados
+df.info()  # Informações gerais sobre os dados
+df.describe()  # Estatísticas descritivas
+
+# 2) Calcular o z-score para 'custo' e 'imc' para detectar outliers
+df['zscore_custo'] = zscore(df['custo'])
+df['zscore_imc'] = zscore(df['imc'])
+
+# 3) Identificar e exibir os outliers
+outliers_custo = df[df['zscore_custo'].abs() > 3]
+outliers_imc = df[df['zscore_imc'].abs() > 3]
+
+print("Outliers de custo:")
+print(outliers_custo)
+
+print("Outliers de IMC:")
+print(outliers_imc)
+
+# 4) Remover outliers
+df_sem_outliers = df[(df['zscore_custo'].abs() <= 3) & (df['zscore_imc'].abs() <= 3)]
+
+# 5) Codificar variáveis categóricas usando LabelEncoder
+label_encoder = LabelEncoder()
+
+# Codificando as variáveis categóricas (modifique conforme necessário)
+df_sem_outliers['genero'] = label_encoder.fit_transform(df_sem_outliers['genero'])
+df_sem_outliers['fumador'] = label_encoder.fit_transform(df_sem_outliers['fumador'])
+df_sem_outliers['estado_civil'] = label_encoder.fit_transform(df_sem_outliers['estado_civil'])
+df_sem_outliers['zona_residencia'] = label_encoder.fit_transform(df_sem_outliers['zona_residencia'])
+df_sem_outliers['class_etaria'] = label_encoder.fit_transform(df_sem_outliers['class_etaria'])
+
+print(df_sem_outliers.sample(4))  # Exibir os dados após codificação
+
+# 6) Separar variáveis independentes (X) e dependente (y)
+X = df_sem_outliers.drop('custo', axis=1)  # Variáveis independentes (features)
+y = df_sem_outliers['custo']  # Variável dependente (target)
+
+# 7) Normalizar as variáveis numéricas com StandardScaler
+scalerX = StandardScaler()
+X_normalizado = scalerX.fit_transform(X)
+
+scalery = StandardScaler()
+y_normalizado = scalery.fit_transform(y.values.reshape(-1, 1))
+
+# 8) Dividir os dados em treino e teste (80% treino, 20% teste)
+Xtreino, Xteste, ytreino, yteste = train_test_split(X_normalizado, y_normalizado, test_size=0.2, random_state=12)
+
+# 9) Criar o modelo de regressão com SVM (Support Vector Machine)
+modelo = SVR()
+
+# 10) Definir a grelha de parâmetros para o GridSearchCV
+grelha = {
+    'C': [100, 10, 1, 0.1],
+    'gamma': ['auto', 'scale', 0.01, 1],
+    'kernel': ['rbf', 'sigmoid', 'linear']
+}
+
+# 11) Realizar a busca dos melhores parâmetros com GridSearchCV
+procura_modelo = GridSearchCV(modelo, param_grid=grelha, cv=10)
+procura_modelo.fit(Xtreino, ytreino.ravel())  # Treinando o modelo com a melhor combinação de parâmetros
+
+# 12) Obter o melhor modelo
+modelo_otimo = procura_modelo.best_estimator_
+
+# 13) Avaliar o modelo otimizado
+score = modelo_otimo.score(Xteste, yteste)  # R^2 score no conjunto de teste
+print(f'R^2 do modelo otimizado no conjunto de teste: {score}')
+
+# 14) Prever os valores de 'custo' no conjunto de teste
+y_pred_normalizado = modelo_otimo.predict(Xteste)
+
+# Desnormalizar as previsões e os valores reais
+y_pred = scalery.inverse_transform(y_pred_normalizado.reshape(-1, 1))
+yteste_original = scalery.inverse_transform(yteste.reshape(-1, 1))
+
+# 15) Calcular o erro quadrático médio (MSE)
+mse = mean_squared_error(yteste_original, y_pred)
+print(f'Erro quadrático médio (MSE): {mse}')
+
+# 16) Visualizar as previsões comparadas com os valores reais
+plt.figure(figsize=(10, 6))
+plt.scatter(yteste_original, y_pred, color='blue')
+plt.plot([yteste_original.min(), yteste_original.max()], [yteste_original.min(), yteste_original.max()], color='red', linestyle='--')
+plt.title('Previsões vs Realidade')
+plt.xlabel('Valores reais de Custo')
+plt.ylabel('Previsões de Custo')
+plt.show()

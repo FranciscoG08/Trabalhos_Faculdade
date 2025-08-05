@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Elétricos</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link rel="stylesheet" type="text/css" href="estilo_eletricos.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Font Awesome CSS -->
+
+</head>
+
+<body>
+  <header class="nav_bar">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="home_page.html">
+          <img src="Assets/LOGO_Eletrico.jpg">
+        </a>
+        <div class="green">
+          <h5> Green </h5>
+        </div>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavId">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link active cor_headertxt" href="Nos_ajudamos.html" aria-current="page">Nós ajudamos!</a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link active cor_headertxt" href="eletricos.html" aria-current="page">Elétricos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active cor_headertxt" href="anuncia.html" aria-current="page">Anuncia</a>
+            </li>
+            <div class="botaoLogin">
+              <li class="nav-login">
+                <a class="nav-link active" href="login.html" aria-current="page"><span class="cor_login">Login/Sign
+                    up</span></a>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+  <main>
+    <div class="container-fluid bg-danger px-0 fundo">
+      <div class="row g-0 bg-info position-relative"> <!--Imagem de fundo E butões-->
+        <div class="col-md-12 position-relative">
+          <div class="imagem_fundo position-relative">
+            <img src="Assets/Imagem.png" class="imagem_fundo">
+            <div class="frase d-flex align-items-center justify-content-center">
+              <h2>O seu futuro carro está aqui na AUTO GTR</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row g-0 bg-info position-relative">
+          <div class="col-md-6 d-flex align-items-center justify-content-center">
+            <button type="button" class="BotaoComprar" href="compra.html">Comprar</button>
+          </div>
+          <div class="col-md-6 d-flex align-items-center justify-content-center">
+            <button type="button" class="BotaoAnunciar" href="#">Anunciar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-0 bg-info"> <!-- Menu de pesquisa e seleção-->
+        <div class="col-md-6">
+          <div class="background_middle_1 d-flex align-items-center justify-content-center">
+            <div class="fundo_azul d-flex align-items-center justify-content-center">
+              <input type="search" list="pesquisa" class="caixa_pesquisa"
+                placeholder="O que procura? (Ex: BMW Serie 1, SEAT Ibiza...)" aria-label="Username"
+                aria-describedby="basic-addon1">
+              <div class="row g-0 bg-info">
+                <div class="coluna_1 col-md-6">
+                  <div class="dropdown-buttons d-flex flex-column ">
+                    <select class="dropdown_buttons_1 dropdown-button" aria-label="Marca"
+                      aria-describedby="basic-addon1" onchange="resetSelection(this)">
+                      <option value="" disabled selected hidden>Marca</option>
+                      <option value="Limpar">Limpar Seleção </option>
+                      <option value="Mercedes">Mercedes</option>
+                      <option value="BMW">BMW</option>
+                      <option value="Peugeot">Peugeot</option>
+                      <option value="Renault">Renault</option>
+                      <option value="SEAT">SEAT</option>
+                      <option value="Opel">Opel</option>
+                    </select>
+
+                    <select id="ano_de_Select" class="dropdown_buttons_1 dropdown-button" aria-label="Ano_de"
+                      aria-describedby="basic-addon2" onchange="resetSelection(this)">
+                      <option value="" disabled selected hidden>Ano de</option>
+                      <option value="Limpar">Limpar Seleção </option>
+                    </select>
+
+                    <select id="precoSelect" class="dropdown_buttons_1 dropdown-button" aria-label="Dropdown 3"
+                      aria-describedby="basic-addon3" onchange="resetSelection(this)">
+                      <option value="" disabled selected hidden>Preço até</option>
+                      <option value="Limpar">Limpar Seleção </option>
+                    </select>
+
+                    <select class="dropdown_buttons_1 dropdown-button" aria-label="Dropdown 4"
+                      aria-describedby="basic-addon4" onchange="resetSelection(this)">
+                      <option value="" disabled selected hidden>Tipo de Combustivel</option>
+                      <option value="Limpar">Limpar Seleção </option>
+                      <option value="Gasolina">Gasolina</option>
+                      <option value="Diesel">Diesel</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="coluna_1 col-md-6">
+                  <div class="dropdown-buttons d-flex flex-column">
+                    <select class="dropdown_buttons_1 dropdown-button" aria-label="Modelo"
+                      aria-describedby="basic-addon5" onchange="resetSelection(this)">
+                      <option value="" disabled selected hidden>Modelo</option>
+                      <option value="Limpar">Limpar Seleção </option>
+                      <option value="Opção 1">Modelo 1</option>
+                      <option value="Opção 2">Modelo 2</option>
+                      <option value="Opção 3">Modelo 3</option>
+                      <option value="Opção 4">Modelo 4</option>
+                    </select>
+
+                    <select id="ano_ate_Select" class="dropdown_buttons_1 dropdown-button" aria-label="Ano_ate"
+                      aria-describedby="basic-addon2" onchange="resetSelection(this)">
+                      <option value="" disabled selected hidden>Ano até</option>
+                      <option value="Limpar">Limpar Seleção </option>
+                    </select>
+
+                    <select id="km_select" class="dropdown_buttons_1 dropdown-button" aria-label="Quilometros_até"
+                      aria-describedby="basic-addon7" onchange="resetSelection(this)">
+                      <option value="" disabled selected hidden>Quilometros até</option>
+                      <option value="Limpar">Limpar Seleção </option>
+                    </select>
+
+                    <select class="dropdown_buttons_1 dropdown-button" aria-label="Tipo de caixa"
+                      aria-describedby="basic-addon8" onchange="resetSelection(this)">
+                      <option value="" disabled selected hidden>Tipo de caixa</option>
+                      <option value="Limpar">Limpar Seleção </option>
+                      <option value="Automatica">Automatica</option>
+                      <option value="Manual">Manual</option>
+
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="background_middle_2 d-flex align-items-center justify-content-center">
+            <div class="fundo_azul d-flex align-items-center justify-content-center">
+              <div class="row">
+                <div class="col-md-6 d-flex align-items-center justify-content-center">
+                  <div class="card text-start ">
+                    <div class="card-body">
+                      <div class="cinzento_img"></div>
+                      <div class="descricao_carro">
+                        <h6> Titulo Carro </h6>
+                        <p>
+                          <i class="fas fa-charging-station"></i> Ano
+                          <i class="fas fa-charging-station"></i> Kms
+                          <i class="fas fa-charging-station"></i> Combustivel
+                          <i class="fas fa-charging-station"></i> Cilindrada
+                        </p>
+                        <div class="d-flex align-items-center justify-content-center">
+                          <a href="" class="preco d-flex align-items-center justify-content-center">Preço </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 d-flex align-items-center justify-content-center">
+                  <div class="card text-start ">
+                    <div class="card-body">
+                      <div class="cinzento_img"></div>
+                      <div class="descricao_carro">
+                        <h6> Titulo Carro </h6>
+                        <p>
+                          <i class="fas fa-charging-station"></i> Ano
+                          <i class="fas fa-charging-station"></i> Kms
+                          <i class="fas fa-charging-station"></i> Combustivel
+                          <i class="fas fa-charging-station"></i> Cilindrada
+                        </p>
+                        <div class="d-flex align-items-center justify-content-center">
+                          <a href="" class="preco d-flex align-items-center justify-content-center">Preço </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-0 bg-info"> <!-- Redes Sociais-->
+        <div class="col-md-12">
+          <div class="redes d-flex align-items-center">
+            <h4>Segue-nos nas nossas redes!</h4>
+          </div>
+          <div class="icons d-flex align-items-center justify-content-end">
+            <div class="butao_icon d-grid gap-2 d-md-block">
+              <a href="#" class="btn icon-1" role="button">
+                <img src="Assets/whatsapp_icon_eletricos.svg" alt="WhatsApp" width="40" height="40">
+              </a>
+              <a href="https://www.instagram.com/autogtr_standonline" class="btn icon-2" role="button">
+                <img src="Assets/instagram_icon_eletricos.svg" alt="WhatsApp" width="40" height="40">
+              </a>
+              <a href="#" class="btn icon-3" role="button">
+                <img src="Assets/twitter_icon_eletricos.svg" alt="WhatsApp" width="40" height="40">
+              </a>
+              <a href="#" class="btn icon-4" role="button">
+                <img src="Assets/facebook_icon_eletricos.svg" alt="WhatsApp" width="40" height="40">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-0 bg-info"> <!-- Sugestões da Semana -->
+        <div class="col-md-12">
+          <div class="sugestoes_semana">
+            <div class="row g-0 bg-info">
+              <div class="col-md-4"> <!-- Titulo Sugestoes -->
+                <div class="titulo_sugestoes d-flex align-items-center justify-content-center">
+                  <h3>Sugestões da Semana</h3>
+                </div>
+              </div>
+            </div>
+            <div class="row g-0 bg-info"> <!-- Carrocel Sugestoes -->
+              <div class="col-md-12 d-flex align-items-center justify-content-center">
+                <div class="background_blue_carrocel d-flex align-items-center justify-content-center">
+                  <div class="row">
+                    <div class="col-md-3 d-flex align-items-center justify-content-center">
+                      <div class="card text-start ">
+                        <div class="card-body-maior">
+                          <div class="cinzento_img-maior d-flex align-items-center justify-content-center"></div>
+                          <div class="descricao_carro">
+                            <h6> Titulo Carro </h6>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Ano
+                            </p>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Kms
+                            </p>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Combustivel
+                            </p>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Kms
+                            </p>
+                            <div class="d-flex align-items-center justify-content-center">
+                              <a href="" class="preco-maior d-flex align-items-center justify-content-center">Preço </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-center justify-content-center">
+                      <div class="card text-start ">
+                        <div class="card-body-maior">
+                          <div class="cinzento_img-maior d-flex align-items-center justify-content-center"></div>
+                          <div class="descricao_carro">
+                            <h6> Titulo Carro </h6>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Ano
+                            </p>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Kms
+                            </p>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Combustivel
+                            </p>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Kms
+                            </p>
+                            <div class="d-flex align-items-center justify-content-center">
+                              <a href="" class="preco-maior d-flex align-items-center justify-content-center">Preço </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-center justify-content-center">
+                      <div class="card text-start ">
+                        <div class="card-body-maior">
+                          <div class="cinzento_img-maior d-flex align-items-center justify-content-center"></div>
+                          <div class="descricao_carro">
+                            <h6> Titulo Carro </h6>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Ano
+                            </p>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Kms
+                            </p>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Combustivel
+                            </p>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Kms
+                            </p>
+                            <div class="d-flex align-items-center justify-content-center">
+                              <a href="" class="preco-maior d-flex align-items-center justify-content-center">Preço </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-center justify-content-center">
+                      <div class="card text-start ">
+                        <div class="card-body-maior">
+                          <div class="cinzento_img-maior d-flex align-items-center justify-content-center"></div>
+                          <div class="descricao_carro">
+                            <h6> Titulo Carro </h6>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Ano
+                            </p>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Kms
+                            </p>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Combustivel
+                            </p>
+                            <p>
+                              <i class="fas fa-charging-station"></i> Kms
+                            </p>
+                            <div class="d-flex align-items-center justify-content-center">
+                              <a href="" class="preco-maior d-flex align-items-center justify-content-center">Preço </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-0 bg-info">
+        <div class="col-md-12">
+          <div class="perguntas_frequentes">
+            <h2>Porquê um carro elétrico? - Nós Ajudamos!</h2>
+            <div class="accordion accordion-flush" id="acordiao_1">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    <i class="fas fa-plug"></i>Porquê um carro elétrico?
+                  </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#acordiao_1">
+                  <div class="accordion-body">
+                    Escolher um carro elétrico é abraçar uma condução sustentável e eficiente. Para além da redução de
+                    emissões, a opção reflete uma escolha financeiramente vantajosa a longo prazo, com incentivos
+                    governamentais a contribuir. Integrando tecnologias inovadoras e beneficiando-se de uma rede de
+                    carregamento em expansão, os carros elétricos oferecem uma experiência de condução moderna e
+                    eco-friendly, alinhada com um compromisso ambiental e económico.</div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion accordion-flush" id="acordiao_2">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    <i class="fas fa-plug"></i>Quanto tempo demora a bateria de um carro elétrico?
+                  </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#acordiao_2">
+                  <div class="accordion-body">O tempo de carregamento de uma bateria de carro elétrico varia consoante a
+                    tecnologia, capacidade e tipo de carregador usado. Em geral, em carregadores domésticos normais, uma
+                    carga completa pode levar várias horas, idealmente durante a noite. Carregadores de nível 2, comuns
+                    em estações públicas, podem reduzir esse tempo para algumas horas. Por outro lado, carregadores de
+                    alta potência (nível 3 ou carregadores rápidos) podem proporcionar uma carga significativa em
+                    minutos, tornando-se ideais para deslocações mais longas. A constante evolução tecnológica e a
+                    expansão da infraestrutura de carregamento contribuem para reduzir ainda mais os tempos de
+                    carregamento, incentivando a adoção de veículos elétricos.</div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion accordion-flush" id="acordiao_3">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    <i class="fas fa-plug"></i>Quais são os benefícios fiscais dos carros elétricos em Portugal?
+                  </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#acordiao_3">
+                  <div class="accordion-body">Em Portugal, os carros elétricos beneficiam de diversos incentivos
+                    fiscais. Estão isentos do Imposto Sobre Veículos (ISV) e do Imposto Único de Circulação (IUC). Além
+                    disso, os utilizadores podem usufruir de uma dedução de 20% no Imposto sobre o Rendimento de Pessoas
+                    Singulares (IRS) na aquisição de veículos elétricos novos. Empresas também beneficiam de deduções
+                    fiscais relacionadas com a aquisição e utilização de frotas elétricas. Estes incentivos visam não só
+                    promover a adoção de veículos mais sustentáveis mas também impulsionar a transição para uma
+                    mobilidade mais amiga do ambiente em Portugal.</div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion accordion-flush" id="acordiao_4">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                    <i class="fas fa-plug"></i>Qual a autonomia de um carro elétrico?
+                  </button>
+                </h2>
+                <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#acordiao_4">
+                  <div class="accordion-body">A autonomia de um carro elétrico varia amplamente, dependendo do modelo e
+                    das condições de condução. Em média, os carros elétricos modernos oferecem autonomias entre 200 e
+                    500 quilómetros com uma única carga. Tecnologias avançadas de bateria e sistemas de gestão de
+                    energia têm contribuído para o aumento gradual dessa autonomia. Contudo, fatores como temperatura
+                    ambiente, velocidade, terreno e uso de acessórios afetam o desempenho da bateria. O constante
+                    desenvolvimento tecnológico na indústria automóvel visa estender ainda mais a autonomia, tornando os
+                    veículos elétricos uma opção cada vez mais viável e prática para os condutores.</div>
+                </div>
+              </div>
+            </div>
+            <div class="accordion accordion-flush" id="acordiao_5">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                    <i class="fas fa-plug"></i>O que é uma WallBox e é necessário uma para ter um carro elétrico?
+                  </button>
+                </h2>
+                <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#acordiao_5">
+                  <div class="accordion-body">Uma WallBox é um carregador doméstico para veículos elétricos. Embora não
+                    seja estritamente necessário para ter um carro elétrico, é altamente recomendado para otimizar a
+                    carga em casa. Esses dispositivos oferecem maior potência de carregamento em comparação com tomadas
+                    domésticas convencionais, acelerando o processo de carregamento. Além disso, proporcionam
+                    conveniência, controle e segurança adicionais, permitindo a programação de carregamentos e
+                    monitorização do consumo. Uma WallBox facilita a integração do carro elétrico na rotina diária,
+                    tornando a experiência de carregamento mais eficiente e adaptada às necessidades individuais dos
+                    utilizadores.</div>
+                </div>
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-0 bg-info"> <!-- Coluna de pesquisa rapida -->
+        <div class="col-md-12">
+          <div class="background_orange d-flex flex-column">
+            <h3>Marcas mais populares</h3>
+            <div class="row_hiperlinks">
+              <a href="#" class="FIM">BMW</a>
+              <a href="#" class="FIM">Audi</a>
+              <a href="#" class="FIM">Mercedes</a>
+              <a href="#" class="FIM">Opel</a>
+              <a href="#" class="FIM">Porsche</a>
+              <a href="#" class="FIM">Toyota</a>
+              <a href="#" class="FIM">Dacia</a>
+              <a href="#" class="FIM">Citroën</a>
+              <a href="#" class="FIM">Peugeot</a>
+              <a href="#" class="FIM">Renault</a>
+            </div>
+            <h3>Modelos de carros populares</h3>
+            <div class="row_hiperlinks">
+              <a href="#" class="FIM">BMW Serie 1</a>
+              <a href="#" class="FIM">Peugeot 2008</a>
+              <a href="#" class="FIM">Peugeot 208</a>
+              <a href="#" class="FIM">Renault Clio</a>
+              <a href="#" class="FIM">Opel Corsa</a>
+              <a href="#" class="FIM">Mercedes-Benz Classe A</a>
+            </div>
+            <h3>Os nossos stands</h3>
+            <div class="row_hiperlinks">
+              <a href="#" class="FIM">Águas Santas</a>
+              <a href="#" class="FIM">Sao João da Madeira</a>
+              <a href="#" class="FIM">Marco de Canaveses</a>
+              <a href="#" class="FIM">Bragança</a>
+              <a href="#" class="FIM">Leiria</a>
+              <a href="#" class="FIM">Sintra</a>
+            </div>
+            <h3>Distritos e Regiões</h3>
+            <div class="row_hiperlinks">
+              <a href="#" class="FIM">Aveiro</a>
+              <a href="#" class="FIM">Beja</a>
+              <a href="#" class="FIM">Braga</a>
+              <a href="#" class="FIM">Bragança</a>
+              <a href="#" class="FIM">Castelo Branco</a>
+              <a href="#" class="FIM">Coimbra</a>
+              <a href="#" class="FIM">Évora</a>
+              <a href="#" class="FIM">Faro</a>
+              <a href="#" class="FIM">Guarda</a>
+              <a href="#" class="FIM">Leiria</a>
+              <a href="#" class="FIM">Lisbon</a>
+              <a href="#" class="FIM">Portalegre</a>
+              <a href="#" class="FIM">Porto</a>
+              <a href="#" class="FIM">Santarém</a>
+              <a href="#" class="FIM">Setúbal</a>
+              <a href="#" class="FIM">Viana do Castelo</a>
+              <a href="#" class="FIM">Vila Real</a>
+              <a href="#" class="FIM">Viseu</a>
+              <a href="#" class="FIM">Azores</a>
+              <a href="#" class="FIM">Madeira</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="row g-0 bg-info">
+      <div class="col-md-6">
+        <div class="footer_div d-flex align-items-center justify-content-center">
+          <div>
+            <a href="manutencao.html" class="hiperlinks_footer_esq">Politica de Privacidade</a>
+            <a href="manutencao.html" class="hiperlinks_footer_esq">Termos e condições</a>
+            <a href="manutencao.html" class="hiperlinks_footer_esq">Politica de cookies</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="footer_div d-flex align-items-center justify-content-center">
+          <div>
+            <a href="manutencao.html" class="hiperlinks_footer_dir">FAQ</a>
+            <a href="manutencao.html" class="hiperlinks_footer_dir">Sobre nós</a>
+            <a href="manutencao.html" class="hiperlinks_footer_dir">Contatos</a>
+            <a href="https://www.livroreclamacoes.pt/Inicio/" class="hiperlinks_footer_dir">Livro de Reclamações</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1253 @@
+views:
+  - title: Energia
+    sections:
+      - type: grid
+        cards:
+          - type: custom:power-flow-card-plus
+            entities:
+              battery:
+                entity: sensor.batteries_charge_discharge_power
+                state_of_charge: sensor.batteries_state_of_capacity
+                state_of_charge_unit: '%'
+                show_state_of_charge: true
+                invert_state: true
+                state_of_charge_unit_white_space: false
+              grid:
+                secondary_info: {}
+                invert_state: false
+                entity: sensor.rede_power
+              solar:
+                display_zero_state: true
+                secondary_info: {}
+                color_value: false
+                color_icon: false
+                entity: sensor.solar_total
+              home:
+                secondary_info: {}
+                subtract_individual: false
+                circle_animation: true
+                override_state: false
+                use_metadata: false
+                entity: sensor.consumo_da_casa_calculado
+              individual:
+                - entity: sensor.ev_16_filtered_power
+                  icon: mdi:car
+                  name: EV_16
+                  unit_of_measurement: W
+                  display_zero: true
+                - entity: sensor.ev_32_filtered_power
+                  icon: mdi:ev-plug-ccs2
+                  name: EV_32
+                  display_zero: true
+                - entity: sensor.bomba_aqs_filtered_power
+                  icon: mdi:heat-pump
+                  name: Bomba AQS
+                  display_zero: true
+                - entity: sensor.bomba_calor_filtered_power
+                  icon: mdi:air-conditioner
+                  name: Bomba Calor
+                  display_zero: true
+            clickable_entities: true
+            display_zero_lines:
+              mode: show
+              transparency: 50
+              grey_color:
+                - 189
+                - 189
+                - 189
+            use_new_flow_rate_model: true
+            w_decimals: 2
+            kw_decimals: 2
+            min_flow_rate: 0.75
+            max_flow_rate: 6
+            max_expected_power: 2000
+            min_expected_power: 0.01
+            watt_threshold: 1000
+            transparency_zero_lines: 0
+            sort_individual_devices: false
+          - type: custom:apexcharts-card
+            span:
+              start: day
+            update_interval: 15m
+            yaxis:
+              - min: 0
+                apex_config:
+                  tickAmount: 5
+            series:
+              - entity: sensor.consumo_da_casa_em_kw
+                name: Consumption
+                type: line
+                color: salmon
+                stroke_width: 2.5
+                extend_to: false
+              - entity: sensor.producao_solar_em_kw
+                name: Production
+                type: line
+                color: lightgreen
+                stroke_width: 2.5
+                extend_to: false
+              - entity: sensor.ev16_power_em_kw
+                name: EV16
+                type: line
+                color: blue
+                stroke_width: 2.5
+                extend_to: false
+              - entity: sensor.ev32_power_em_kw
+                name: EV32
+                type: line
+                color: purple
+                stroke_width: 2.5
+                extend_to: false
+      - type: grid
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                entity: sensor.exportacao_status
+                show_entity_picture: false
+                show_icon: true
+                show_name: false
+                show_state: true
+                show_label: true
+                state_display: |
+                  [[[ return states['sensor.rede_power'].state + " W"; ]]]
+                state:
+                  - value: ultra
+                    icon: mdi:weather-sunny-alert
+                    label: EXCESS SOLAR
+                    styles:
+                      card:
+                        - background-color: '#001a33'
+                        - color: '#33ccff'
+                  - value: high
+                    icon: mdi:solar-power-variant
+                    label: SOME SOLAR
+                    styles:
+                      card:
+                        - background-color: '#223344'
+                        - color: '#6afa00'
+                  - value: medium
+                    icon: mdi:solar-power
+                    label: PARCIAL SOLAR
+                    styles:
+                      card:
+                        - background-color: '#444400'
+                        - color: '#ffe600'
+                  - value: low
+                    icon: mdi:transmission-tower-export
+                    label: GRID PWR
+                    styles:
+                      card:
+                        - background-color: '#990000'
+                        - color: white
+                styles:
+                  card:
+                    - padding: 2px
+                    - border-radius: 50px
+                    - height: 100px
+                    - width: 260px
+                    - justify-content: center
+                    - align-items: center
+                  label:
+                    - font-size: 16px
+                    - text-align: center
+                  state:
+                    - font-size: 16px
+                    - text-align: center
+              - type: custom:button-card
+                entity: switch.portao_garagem
+                show_name: true
+                show_state: false
+                layout: icon_name
+                name: |
+                  [[[ 
+                    const stateText = entity.state === 'on' ? 'OPEN' : 'CLOSED';
+                    return `Garage Door: ${stateText}`; 
+                  ]]]
+                tap_action:
+                  action: none
+                hold_action:
+                  action: toggle
+                  hold_duration: 2000
+                state:
+                  - value: 'off'
+                    color: rgb(92, 184, 92)
+                    icon: mdi:garage
+                  - value: 'on'
+                    color: rgb(255, 193, 7)
+                    icon: mdi:garage-open
+                styles:
+                  card:
+                    - width: 150px
+                    - height: 100px
+                    - padding: 4px
+                    - font-size: 50px
+                    - display: flex
+                    - flex-direction: column
+                    - justify-content: center
+                    - align-items: center
+                    - margin: auto
+                    - border-radius: 35px
+                  icon:
+                    - width: 80px
+                    - height: 80px
+                  name:
+                    - font-size: 14px
+                    - white-space: pre-line
+                    - text-align: center
+                    - margin-top: 0px
+          - type: custom:button-card
+            entity: sensor.exportacao_status
+            show_entity_picture: false
+            show_icon: true
+            show_name: false
+            show_state: true
+            show_label: true
+            state_display: |
+              [[[ return states['sensor.rede_power'].state + " W"; ]]]
+            state:
+              - value: ultra
+                icon: mdi:weather-sunny-alert
+                label: EXCESS SOLAR
+                styles:
+                  card:
+                    - background-color: '#001a33'
+                    - color: '#33ccff'
+              - value: high
+                icon: mdi:solar-power-variant
+                label: SOME SOLAR
+                styles:
+                  card:
+                    - background-color: '#223344'
+                    - color: '#6afa00'
+              - value: medium
+                icon: mdi:solar-power
+                label: PARCIAL SOLAR
+                styles:
+                  card:
+                    - background-color: '#444400'
+                    - color: '#ffe600'
+              - value: low
+                icon: mdi:transmission-tower-export
+                label: GRID PWR
+                styles:
+                  card:
+                    - background-color: '#990000'
+                    - color: white
+            styles:
+              card:
+                - padding: 2px
+                - border-radius: 25px
+                - height: 90px
+                - width: 430px
+                - justify-content: center
+                - align-items: center
+              label:
+                - font-size: 14px
+                - text-align: center
+              state:
+                - font-size: 13px
+                - text-align: center
+          - type: custom:button-card
+            entity: switch.portao_garagem
+            show_name: true
+            show_state: false
+            layout: icon_name
+            name: |
+              [[[ 
+                const stateText = entity.state === 'on' ? 'OPEN' : 'CLOSED';
+                return `Garage Door: ${stateText}`; 
+              ]]]
+            tap_action:
+              action: none
+            hold_action:
+              action: toggle
+              hold_duration: 2000
+            state:
+              - value: 'off'
+                color: rgb(92, 184, 92)
+                icon: mdi:garage
+              - value: 'on'
+                color: rgb(255, 193, 7)
+                icon: mdi:garage-open
+            styles:
+              card:
+                - height: 90px
+                - width: 430px
+                - padding: 4px
+                - font-size: 50px
+                - display: flex
+                - flex-direction: column
+                - justify-content: center
+                - align-items: center
+                - margin: auto
+                - border-radius: 35px
+              icon:
+                - width: 80px
+                - height: 80px
+              name:
+                - font-size: 24px
+                - white-space: pre-line
+                - text-align: center
+                - margin-top: '-20px'
+      - type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: entities
+                show_header_toggle: false
+                entities:
+                  - entity: sensor.netatmo_1piso_netatmo_exterior_temperature
+                    name: Temperature
+                    icon: mdi:thermometer
+                  - entity: sensor.netatmo_1piso_netatmo_exterior_humidity
+                    name: Humidity
+                    icon: mdi:water-percent
+                  - entity: sensor.netatmo_1piso_rain_gauge_precipitation_today
+                    name: Precipitation
+                    icon: mdi:weather-rainy
+                  - entity: sensor.netatmo_1piso_anemometer_wind_speed
+                    name: Wind Speed
+                    icon: mdi:weather-windy
+                  - entity: sensor.netatmo_1piso_anemometer_wind_direction
+                    name: Wind Direction
+                    icon: mdi:compass
+                  - entity: sensor.netatmo_1piso_atmospheric_pressure
+                    name: Pressure
+                    icon: mdi:gauge
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mini-graph-card
+                    name: Living Room
+                    entities:
+                      - entity: sensor.netatmo_1piso_netatmo_sala_temperature
+                        name: Temperature
+                        show_state: true
+                        show_graph: true
+                        color: orange
+                      - entity: sensor.netatmo_1piso_netatmo_sala_humidity
+                        name: Humidity
+                        show_state: true
+                        show_graph: false
+                    line_width: 2
+                    font_size: 60
+                    hours_to_show: 24
+                    points_per_hour: 1
+                  - type: thermostat
+                    entity: climate.altherma_leaving_water_offset
+                    name: ' '
+                    grid_options:
+                      rows: 4
+                      columns: 6
+                    show_current_as_primary: false
+                    card_mod:
+                      style: |
+                        ha-card {
+                          padding: 1px 35px !important;
+                        }
+                        .container {
+                          transform: scale(0.95);
+                          transform-origin: top;
+                        }
+                        ha-card:after {
+                          content: "Outside {{ states('sensor.altherma_climatecontrol_outdoor_temperature') }}°C";
+                          display: block;
+                          color: white;
+                          font-size: 14px;
+                          padding-top: 4x;
+                          text-align: center;
+                        }
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mini-graph-card
+                    name: Suite
+                    entities:
+                      - entity: sensor.suite_temperatura
+                        name: Temperature
+                        show_graph: false
+                        show_state: true
+                      - entity: sensor.suite_humidade
+                        name: Humidity
+                        show_graph: false
+                        show_state: true
+                    font_size: 50
+                    height: 30
+                  - type: custom:mini-graph-card
+                    name: Ground Floor Room
+                    entities:
+                      - entity: sensor.quartorc_temperatura
+                        name: Temperature
+                        show_graph: false
+                        show_state: true
+                        color: orange
+                      - entity: sensor.quartorc_humidade
+                        name: Humidity
+                        show_graph: false
+                        show_state: true
+                        color: blue
+                    font_size: 50
+                    height: 30
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mini-graph-card
+                    name: East Room
+                    entities:
+                      - entity: sensor.quartonascente_temperatura
+                        name: Temperature
+                        show_graph: false
+                        show_state: true
+                        color: orange
+                      - entity: sensor.quartonascente_humidade
+                        name: Humidity
+                        show_graph: false
+                        show_state: true
+                        color: blue
+                    font_size: 50
+                    height: 30
+                  - type: custom:mini-graph-card
+                    name: West Room
+                    entities:
+                      - entity: sensor.quartopoente_temperatura
+                        name: Temperature
+                        show_graph: false
+                        show_state: true
+                        color: orange
+                      - entity: sensor.quartopoente_humidade
+                        name: Humidity
+                        show_graph: false
+                        show_state: true
+                        color: blue
+                    font_size: 50
+                    height: 30
+      - type: grid
+        cards:
+          - type: markdown
+            content: >
+              <ha-icon icon="mdi:thermometer"></ha-icon>
+              Temperatura:&nbsp;&nbsp; {{
+              states('sensor.netatmo_1piso_netatmo_exterior_temperature') }}°C  
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <ha-icon
+              icon="mdi:water-percent"></ha-icon> Humidade:&nbsp;&nbsp; {{
+              states('sensor.netatmo_1piso_netatmo_exterior_humidity') }}%  
+              <br><br> <ha-icon icon="mdi:weather-rainy"></ha-icon>
+              Precipitação:&nbsp;&nbsp; {{
+              states('sensor.netatmo_1piso_rain_gauge_precipitation_today') }}
+              mm &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <ha-icon
+              icon="mdi:weather-windy"></ha-icon> Vento:&nbsp;&nbsp; {{
+              states('sensor.netatmo_1piso_anemometer_wind_speed') }} km/h  
+              <br><br> <ha-icon icon="mdi:compass"></ha-icon> Direção do
+              Vento:&nbsp;&nbsp; {{
+              states('sensor.netatmo_1piso_anemometer_wind_direction') }}° 
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <ha-icon
+              icon="mdi:gauge"></ha-icon> Pressão:&nbsp;&nbsp; {{
+              states('sensor.netatmo_1piso_atmospheric_pressure') }} hPa
+      - type: grid
+        cards:
+          - type: custom:button-card
+            entity: sensor.exportacao_status
+            show_entity_picture: false
+            show_icon: true
+            show_name: false
+            show_state: true
+            show_label: true
+            state_display: >
+              [[[ return states['input_number.sim_teste_power_input'].state + "
+              W"; ]]]
+            state:
+              - value: ultra
+                icon: mdi:weather-sunny-alert
+                label: EXCESS SOLAR
+                styles:
+                  card:
+                    - background-color: '#80dfff'
+                    - color: white
+              - value: high
+                icon: mdi:solar-power-variant
+                label: SOME SOLAR
+                styles:
+                  card:
+                    - background-color: '#223344'
+                    - color: white
+              - value: medium
+                icon: mdi:solar-power
+                label: PARCIAL SOLAR
+                styles:
+                  card:
+                    - background-color: '#ffcc80'
+                    - color: white
+              - value: low
+                icon: mdi:transmission-tower-export
+                label: GRID PWR
+                styles:
+                  card:
+                    - background-color: '#ff8080'
+                    - color: white
+            styles:
+              card:
+                - padding: 2px
+                - border-radius: 50px
+                - height: 100px
+                - width: 230px
+                - justify-content: center
+                - align-items: center
+              label:
+                - font-size: 16px
+                - text-align: center
+                - color: white
+              state:
+                - font-size: 16px
+                - text-align: center
+                - color: white
+    header: {}
+    type: sections
+    max_columns: 2
+    cards: []
+  - type: sections
+    max_columns: 4
+    title: energia teste
+    path: energia-teste
+    sections:
+      - type: grid
+        cards:
+          - type: energy-devices-graph
+          - chart_type: line
+            period: hour
+            type: statistics-graph
+            entities:
+              - sensor.soma_dos_3_solares
+              - sensor.fotovoltaico_power
+            days_to_show: 1
+            stat_types:
+              - mean
+        column_span: 1
+      - type: grid
+        cards:
+          - type: gauge
+            entity: sensor.daily_consumed_energy
+          - type: gauge
+            entity: sensor.daily_exported_energy
+      - type: grid
+        cards:
+          - square: false
+            type: grid
+            columns: 3
+            cards:
+              - type: gauge
+                entity: sensor.solar_total
+                name: SOLAR
+                needle: false
+                min: -1
+                max: 5000
+                severity:
+                  green: 1
+                  yellow: -1
+                  red: 0
+              - type: gauge
+                entity: sensor.consumo_da_casa_novo
+                name: HOME
+                needle: false
+                min: 0
+                max: 10000
+                severity:
+                  green: -1
+                  yellow: 0
+                  red: -1
+              - type: gauge
+                entity: sensor.rede_power
+                name: GRID
+                needle: false
+                min: -6000
+                max: 6000
+                severity:
+                  red: 1
+                  yellow: 0
+                  green: -1
+            grid_options:
+              rows: 3
+              columns: 12
+          - type: custom:button-card
+            entity: sensor.exportacao_status
+            show_entity_picture: false
+            show_icon: true
+            show_name: false
+            show_state: true
+            show_label: true
+            state_display: |
+              [[[ return states['sensor.rede_power'].state + " W"; ]]]
+            state:
+              - value: free
+                icon: mdi:solar-power-variant
+                label: FREE POWER
+                styles:
+                  card:
+                    - background-color: '#223344'
+                    - color: '#6afa00'
+              - value: grid
+                icon: mdi:transmission-tower-export
+                label: GRID POWER
+                styles:
+                  card:
+                    - background-color: '#990000'
+                    - color: red
+            styles:
+              card:
+                - padding: 2px
+                - border-radius: 25px
+                - height: 120px
+                - width: 120px
+                - justify-content: center
+                - align-items: center
+              label:
+                - font-size: 14px
+                - text-align: center
+              state:
+                - font-size: 13px
+                - text-align: center
+      - type: grid
+        cards:
+          - type: picture-elements
+            image: /local/bg.png
+            elements:
+              - type: custom:power-flow-card-plus
+                style:
+                  top: 71.5%
+                  left: 50%
+                  width: 100%
+                entities:
+                  battery:
+                    entity: sensor.batteries_charge_discharge_power
+                    state_of_charge: sensor.batteries_state_of_capacity
+                    state_of_charge_unit: '%'
+                    show_state_of_charge: true
+                    invert_state: true
+                    state_of_charge_unit_white_space: false
+                  grid:
+                    secondary_info: {}
+                    invert_state: false
+                    entity: sensor.rede_power
+                  solar:
+                    display_zero_state: true
+                    secondary_info: {}
+                    color_value: false
+                    color_icon: false
+                    entity: sensor.solar_total
+                  home:
+                    secondary_info: {}
+                    subtract_individual: false
+                    circle_animation: true
+                    override_state: true
+                    use_metadata: false
+                  individual:
+                    - entity: sensor.bomba_calor_filtered_power
+                      icon: mdi:blank
+                      name: Heat Pump
+                      display_zero: true
+                    - entity: sensor.ev_32_filtered_power
+                      icon: mdi:blank
+                      name: EV_32
+                      display_zero: true
+                    - entity: sensor.bomba_aqs_filtered_power
+                      icon: mdi:blank
+                      name: DHW PUMP
+                      display_zero: true
+                    - entity: sensor.ev_16_filtered_power
+                      icon: mdi:blank
+                      name: EV_16
+                      unit_of_measurement: W
+                      display_zero: true
+                clickable_entities: true
+                display_zero_lines:
+                  mode: show
+                  transparency: 50
+                  grey_color:
+                    - 189
+                    - 189
+                    - 189
+                use_new_flow_rate_model: true
+                w_decimals: 2
+                kw_decimals: 2
+                min_flow_rate: 0.75
+                max_flow_rate: 6
+                max_expected_power: 2000
+                min_expected_power: 0.01
+                watt_threshold: 1000
+                transparency_zero_lines: 0
+                sort_individual_devices: false
+                grid_options:
+                  columns: 12
+                  rows: 6
+              - type: image
+                image: /local/1.png
+                style:
+                  top: 20%
+                  left: 87.5%
+                  width: 40px
+                entity: sensor.bomba_aqs_filtered_power
+              - type: image
+                image: /local/2.png
+                entity: sensor.bomba_calor_filtered_power
+                style:
+                  top: 20%
+                  left: 62.5%
+                  width: 25px
+              - type: image
+                image: /local/5.png
+                entity: sensor.ev_32_filtered_power
+                style:
+                  top: 110%
+                  left: 62.5%
+                  width: 40px
+              - type: image
+                image: /local/6.png
+                entity: sensor.ev_16_filtered_power
+                style:
+                  top: 109%
+                  left: 87%
+                  width: 25px
+              - type: image
+                image: /local/3.png
+                entity: sensor.batteries_state_of_capacity
+                style:
+                  top: 112%
+                  left: 37.5%
+                  width: 30px
+            grid_options:
+              columns: 12
+              rows: 5.7
+  - type: sections
+    max_columns: 4
+    title: testeee
+    path: testeee
+    sections:
+      - type: grid
+        cards:
+          - type: custom:sunsynk-power-flow-card
+            cardstyle: lite
+            large_font: true
+            title: Huawei - Power Monitor Falta 1 inversor ou solar
+            title_size: 18px
+            show_solar: true
+            show_grid: true
+            show_battery: true
+            decimal_places: 2
+            decimal_places_energy: 2
+            dynamic_line_width: true
+            inverter:
+              modern: false
+              colour: lightblue
+              autarky: power
+              auto_scale: false
+              model: huawei
+              three_phase: false
+            battery:
+              energy: 5000
+              shutdown_soc: 10
+              invert_power: true
+              colour: '#fc8d83'
+              show_daily: false
+              animation_speed: 5
+              max_power: 10000
+              show_absolute: true
+              auto_scale: true
+              hide_soc: true
+              show_remaining_energy: true
+              dynamic_colour: true
+              linear_gradient: true
+            solar:
+              colour: '#F7BC00'
+              show_daily: true
+              mppts: 2
+              animation_speed: 8
+              max_power: 6600
+              pv1_name: PV1
+              pv2_name: PV2
+              display_mode: 1
+              auto_scale: true
+              dynamic_colour: true
+              pv1_max_power: 3300
+              pv2_max_power: 3300
+              efficiency: 3
+            load:
+              colour: magenta
+              show_daily: false
+              animation_speed: 4
+              essential_name: Essential
+              max_power: 9000
+              additional_loads: 4
+              load1_name: EV16
+              load2_name: EV32
+              load3_name: Heat
+              load4_name: DHW
+              load1_icon: mdi:car
+              load2_icon: mdi:car-2-plus
+              load3_icon: mdi:water-boiler
+              load4_icon: mdi:kettle
+              auto_scale: true
+              dynamic_icon: true
+              dynamic_colour: true
+            grid:
+              grid_name: Grid
+              colour: '#FF2400'
+              export_colour: green
+              no_grid_colour: '#a40013'
+              grid_off_colour: '#e7d59f'
+              show_daily_buy: false
+              show_daily_sell: false
+              show_nonessential: true
+              invert_grid: false
+              animation_speed: 7
+              max_power: 15000
+              auto_scale: true
+              dynamic_icon: true
+              dynamic_colour: true
+              energy_cost_decimals: 3
+            entities:
+              day_battery_charge_70: sensor.batteries_day_charge
+              day_battery_discharge_71: sensor.batteries_day_discharge
+              day_load_energy_84: sensor.house_consumption_energy_daily
+              day_grid_import_76: sensor.hs_grid_imported_daily
+              day_grid_export_77: sensor.hs_grid_exported_daily
+              day_pv_energy_108: sensor.inverter_daily_yield
+              grid_power_169: sensor.house_consumption_power
+              inverter_power_175: sensor.inverters_active_power
+              inverter_status_59: sensor.inverters_state
+              dc_transformer_temp_90: sensor.inverter_internal_temperature
+              pv1_power_186: sensor.pv1_power
+              pv2_power_187: sensor.pv2_power
+              environment_temp: sensor.altherma_climatecontrol_outdoor_temperature
+              pv1_voltage_109: sensor.inverter_pv_1_voltage
+              pv1_current_110: sensor.inverter_pv_1_current
+              pv2_voltage_111: sensor.inverter_pv_2_voltage
+              pv2_current_112: sensor.inverter_pv_2_current
+              battery_voltage_183: sensor.batteries_bus_voltage
+              battery_soc_184: sensor.batteries_state_of_capacity
+              battery_power_190: sensor.batteries_charge_discharge_power
+              battery_current_191: sensor.batteries_bus_current
+              battery_temp_182: sensor.battery_1_bms_temperature
+              battery_status: sensor.batteries_status
+              essential_power: sensor.consumo_da_casa_grafico_corrigido
+              essential_load1: sensor.ev_16_filtered_power
+              essential_load2: sensor.ev_32_filtered_power
+              essential_load3: sensor.bomba_aqs_filtered_power
+              essential_load4: sensor.bomba_calor_filtered_power
+              essential_load1_extra: null
+              essential_load2_extra: null
+              essential_load3_extra: null
+              essential_load4_extra: null
+              grid_ct_power_172: sensor.rede_power
+              grid_connected_status_194: sensor.inverters_off_grid_status
+              energy_cost_buy: null
+              energy_cost_sell: null
+              solar_sell_247: switch.null
+              grid_voltage: sensor.power_meter_voltage
+            title_colour:
+              - 245
+              - 10
+              - 34
+            grid_options:
+              columns: 42
+              rows: auto
+            wide: false
+      - type: grid
+        cards:
+          - type: custom:power-flow-card-plus
+            entities:
+              battery:
+                entity: sensor.batteries_charge_discharge_power
+                state_of_charge: sensor.batteries_state_of_capacity
+                state_of_charge_unit: '%'
+                show_state_of_charge: true
+                invert_state: true
+                state_of_charge_unit_white_space: false
+              grid:
+                secondary_info: {}
+                invert_state: false
+                entity: sensor.rede_power
+              solar:
+                display_zero_state: true
+                secondary_info: {}
+                color_value: false
+                color_icon: false
+                entity: sensor.inverter_input_power
+              home:
+                secondary_info: {}
+                subtract_individual: false
+                circle_animation: true
+                override_state: true
+                use_metadata: false
+              individual:
+                - entity: sensor.ev_16_filtered_power
+                  icon: mdi:car
+                  name: EV_16
+                  unit_of_measurement: W
+                  display_zero: true
+                - entity: sensor.ev_32_filtered_power
+                  icon: mdi:ev-plug-ccs2
+                  name: EV_32
+                  display_zero: true
+                - entity: sensor.bomba_aqs_filtered_power
+                  icon: mdi:heat-pump
+                  name: Bomba AQS
+                  display_zero: true
+                - entity: sensor.bomba_calor_filtered_power
+                  icon: mdi:air-conditioner
+                  name: Bomba Calor
+                  display_zero: true
+              fossil_fuel_percentage:
+                secondary_info: {}
+            clickable_entities: true
+            display_zero_lines:
+              mode: show
+              transparency: 50
+              grey_color:
+                - 189
+                - 189
+                - 189
+            use_new_flow_rate_model: true
+            w_decimals: 2
+            kw_decimals: 2
+            min_flow_rate: 0.75
+            max_flow_rate: 6
+            max_expected_power: 2000
+            min_expected_power: 0.01
+            watt_threshold: 1000
+            transparency_zero_lines: 0
+            sort_individual_devices: false
+      - type: grid
+        cards:
+          - type: custom:sunsynk-power-flow-card
+            cardstyle: lite
+            large_font: true
+            title: Simulação solar3
+            title_size: 18px
+            show_solar: true
+            show_grid: true
+            show_battery: true
+            decimal_places: 2
+            decimal_places_energy: 2
+            dynamic_line_width: true
+            inverter:
+              modern: false
+              colour: lightblue
+              autarky: power
+              auto_scale: false
+              model: huawei
+              three_phase: false
+            battery:
+              energy: 5000
+              shutdown_soc: 10
+              invert_power: true
+              colour: '#fc8d83'
+              show_daily: false
+              animation_speed: 5
+              max_power: 10000
+              show_absolute: true
+              auto_scale: true
+              hide_soc: true
+              show_remaining_energy: true
+              dynamic_colour: true
+              linear_gradient: true
+            solar:
+              colour: '#F7BC00'
+              show_daily: true
+              mppts: 3
+              animation_speed: 8
+              max_power: 6600
+              pv1_name: PV1
+              pv2_name: PV2
+              pv3_name: Teste/Simulado
+              display_mode: 1
+              auto_scale: true
+              dynamic_colour: true
+              pv1_max_power: 3300
+              pv2_max_power: 3300
+              pv3_max_power: 3300
+              efficiency: 3
+            load:
+              colour: magenta
+              show_daily: false
+              animation_speed: 4
+              essential_name: Essential
+              max_power: 9000
+              additional_loads: 4
+              load1_name: EV16
+              load2_name: EV32
+              load3_name: Heat
+              load4_name: DHW
+              load1_icon: mdi:car
+              load2_icon: mdi:car-2-plus
+              load3_icon: mdi:water-boiler
+              load4_icon: mdi:kettle
+              auto_scale: true
+              dynamic_icon: true
+              dynamic_colour: true
+            grid:
+              grid_name: Grid
+              colour: '#FF2400'
+              export_colour: green
+              no_grid_colour: '#a40013'
+              grid_off_colour: '#e7d59f'
+              show_daily_buy: false
+              show_daily_sell: false
+              show_nonessential: true
+              invert_grid: false
+              animation_speed: 7
+              max_power: 15000
+              auto_scale: true
+              dynamic_icon: true
+              dynamic_colour: true
+              energy_cost_decimals: 3
+            entities:
+              day_battery_charge_70: sensor.batteries_day_charge
+              day_battery_discharge_71: sensor.batteries_day_discharge
+              day_load_energy_84: sensor.house_consumption_energy_daily
+              day_grid_import_76: sensor.hs_grid_imported_daily
+              day_grid_export_77: sensor.hs_grid_exported_daily
+              day_pv_energy_108: sensor.inverter_daily_yield
+              grid_power_169: sensor.house_consumption_power
+              inverter_power_175: sensor.inverters_active_power
+              inverter_status_59: sensor.inverters_state
+              dc_transformer_temp_90: sensor.inverter_internal_temperature
+              pv1_power_186: sensor.pv1_power
+              pv2_power_187: sensor.pv2_power
+              pv3_power_188: sensor.pv2_power
+              environment_temp: sensor.altherma_climatecontrol_outdoor_temperature
+              pv1_voltage_109: sensor.inverter_pv_1_voltage
+              pv1_current_110: sensor.inverter_pv_1_current
+              pv2_voltage_111: sensor.inverter_pv_2_voltage
+              pv2_current_112: sensor.inverter_pv_2_current
+              pv3_voltage_113: sensor.inverter_pv_2_voltage
+              pv3_current_114: sensor.inverter_pv_2_current
+              battery_voltage_183: sensor.batteries_bus_voltage
+              battery_soc_184: sensor.batteries_state_of_capacity
+              battery_power_190: sensor.batteries_charge_discharge_power
+              battery_current_191: sensor.batteries_bus_current
+              battery_temp_182: sensor.battery_1_bms_temperature
+              battery_status: sensor.batteries_status
+              essential_power: sensor.consumo_da_casa_grafico_corrigido
+              essential_load1: sensor.ev_16_filtered_power
+              essential_load2: sensor.ev_32_filtered_power
+              essential_load3: sensor.bomba_aqs_filtered_power
+              essential_load4: sensor.bomba_calor_filtered_power
+              essential_load1_extra: null
+              essential_load2_extra: null
+              essential_load3_extra: null
+              essential_load4_extra: null
+              grid_ct_power_172: sensor.rede_power
+              grid_connected_status_194: sensor.inverters_off_grid_status
+              energy_cost_buy: null
+              energy_cost_sell: null
+              solar_sell_247: switch.null
+              grid_voltage: sensor.power_meter_voltage
+            title_colour:
+              - 245
+              - 10
+              - 34
+            grid_options:
+              columns: 42
+              rows: auto
+            wide: false
+      - type: grid
+        cards:
+          - type: custom:power-flow-card-plus
+            entities:
+              battery:
+                entity: sensor.batteries_charge_discharge_power
+                state_of_charge: sensor.batteries_state_of_capacity
+                state_of_charge_unit: '%'
+                show_state_of_charge: true
+                invert_state: true
+                state_of_charge_unit_white_space: false
+              grid:
+                secondary_info: {}
+                invert_state: false
+                entity: sensor.rede_power
+              solar:
+                display_zero_state: true
+                secondary_info: {}
+                color_value: false
+                color_icon: false
+                entity: sensor.total_pv_power_calculated
+              home:
+                entity: sensor.consumo_da_casa_novo
+                secondary_info: {}
+                subtract_individual: false
+                circle_animation: true
+                override_state: true
+                use_metadata: false
+              individual:
+                - entity: sensor.ev_16_filtered_power
+                  icon: mdi:car
+                  name: EV_16
+                  unit_of_measurement: W
+                  display_zero: true
+                - entity: sensor.ev_32_filtered_power
+                  icon: mdi:ev-plug-ccs2
+                  name: EV_32
+                  display_zero: true
+                - entity: sensor.bomba_aqs_filtered_power
+                  icon: mdi:heat-pump
+                  name: Bomba AQS
+                  display_zero: true
+                - entity: sensor.bomba_calor_filtered_power
+                  icon: mdi:air-conditioner
+                  name: Bomba Calor
+                  display_zero: true
+              fossil_fuel_percentage:
+                secondary_info: {}
+            clickable_entities: true
+            display_zero_lines:
+              mode: show
+              transparency: 50
+              grey_color:
+                - 189
+                - 189
+                - 189
+            use_new_flow_rate_model: true
+            w_decimals: 2
+            kw_decimals: 2
+            min_flow_rate: 0.75
+            max_flow_rate: 6
+            max_expected_power: 2000
+            min_expected_power: 0.01
+            watt_threshold: 1000
+            transparency_zero_lines: 0
+            sort_individual_devices: false
+  - type: sections
+    max_columns: 4
+    title: irobot
+    path: irobot
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Nova secção
+      - type: grid
+        cards:
+          - type: heading
+            heading: Roomba_Sala
+          - type: tile
+            entity: vacuum.roomba_sala
+      - type: grid
+        cards:
+          - type: heading
+            heading: Braava_Sala
+          - type: tile
+            entity: vacuum.braava_sala
+      - type: grid
+        cards:
+          - type: heading
+            heading: Roomba_Piso
+          - type: tile
+            entity: vacuum.roomba_piso
+      - type: grid
+        cards:
+          - type: heading
+            heading: Roomba_Bunker
+          - type: tile
+            entity: vacuum.roomba_bunker
+      - type: grid
+        cards:
+          - type: heading
+            heading: Roomba_Cave
+          - type: tile
+            entity: vacuum.roomba_cave
+      - type: grid
+        cards:
+          - type: heading
+            heading: Máquina de lavar loiça
+          - type: tile
+            entity: select.maquina_de_lavar_loica_active_program
+          - type: tile
+            entity: switch.maquina_de_lavar_loica_child_lock
+          - type: tile
+            entity: switch.maquina_de_lavar_loica_half_load
+          - type: tile
+            entity: switch.maquina_de_lavar_loica_hygiene
+          - type: tile
+            entity: switch.maquina_de_lavar_loica_intensive_zone
+          - type: tile
+            entity: switch.maquina_de_lavar_loica_power
+          - type: tile
+            entity: select.maquina_de_lavar_loica_selected_program
+          - type: tile
+            entity: number.maquina_de_lavar_loica_start_in_relative
+          - type: tile
+            entity: button.maquina_de_lavar_loica_stop_program
+          - type: tile
+            entity: switch.maquina_de_lavar_loica_vario_speed
+  - type: sections
+    max_columns: 1
+    title: teste_grafico
+    path: teste
+    sections:
+      - type: grid
+        cards:
+          - type: history-graph
+            hours_to_show: 24
+            refresh_interval: 60
+            entities:
+              - entity: sensor.consumo_da_casa_em_kw
+                name: Total Consumption
+              - entity: sensor.producao_solar_em_kw
+                name: Solar Production
+              - entity: sensor.ev16_power_em_kw
+                name: EV16
+              - entity: sensor.ev32_power_em_kw
+                name: EV32
+          - type: custom:apexcharts-card
+            graph_span: 24h
+            span:
+              start: day
+            update_interval: 15min
+            yaxis:
+              - min: 0
+                apex_config:
+                  tickAmount: 5
+            series:
+              - entity: sensor.consumo_da_casa_em_kw
+                name: Total Consumption
+                type: line
+                stroke_width: 1.2
+                statistics:
+                  type: mean
+                group_by:
+                  duration: 15minute
+                  fill: 'null'
+              - entity: sensor.producao_solar_em_kw
+                name: Solar Production
+                type: line
+                stroke_width: 1.2
+                statistics:
+                  type: mean
+                group_by:
+                  duration: 15minute
+                  fill: 'null'
+              - entity: sensor.ev16_power_em_kw
+                name: EV16
+                type: line
+                stroke_width: 1.2
+                statistics:
+                  type: mean
+                group_by:
+                  duration: 15minute
+                  fill: 'null'
+              - entity: sensor.ev32_power_em_kw
+                name: EV32
+                type: line
+                stroke_width: 1.2
+                statistics:
+                  type: mean
+                group_by:
+                  duration: 15minute
+                  fill: 'null'
+        column_span: 7
+    cards: []

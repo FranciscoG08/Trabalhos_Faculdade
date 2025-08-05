@@ -1,0 +1,555 @@
+views:
+  - sections:
+      - type: grid
+        cards:
+          - type: custom:button-card
+            entity: sensor.estado_de_alerta
+            show_entity_picture: false
+            show_icon: true
+            show_name: false
+            show_state: true
+            show_label: true
+            state_display: >
+              [[[ return entity && entity.state ? entity.state : "Indisponível";
+              ]]]
+            state:
+              - value: Open gate
+                icon: mdi:garage-open
+                styles:
+                  card:
+                    - background-color: '#ff7043'
+                    - color: white
+              - value: Rain
+                icon: mdi:weather-rainy
+                styles:
+                  card:
+                    - background-color: '#42a5f5'
+                    - color: white
+              - value: High CO₂
+                icon: mdi:molecule-co2
+                styles:
+                  card:
+                    - background-color: '#e53935'
+                    - color: white
+              - value: High Noise
+                icon: mdi:volume-high
+                styles:
+                  card:
+                    - background-color: '#ffb300'
+                    - color: white
+              - value: Robot cleaning
+                icon: mdi:robot-vacuum
+                styles:
+                  card:
+                    - background-color: '#7e57c2'
+                    - color: white
+              - value: Heat pump connected
+                icon: mdi:fire
+                styles:
+                  card:
+                    - background-color: '#ef5350'
+                    - color: white
+              - value: DHW pump connected
+                icon: mdi:water-boiler
+                styles:
+                  card:
+                    - background-color: '#26c6da'
+                    - color: white
+              - value: Strong wind
+                icon: mdi:weather-windy
+                styles:
+                  card:
+                    - background-color: '#81d4fa'
+                    - color: black
+              - value: Negative temperature
+                icon: mdi:snowflake
+                styles:
+                  card:
+                    - background-color: '#90caf9'
+                    - color: black
+              - value: High humidity
+                icon: mdi:water-percent
+                styles:
+                  card:
+                    - background-color: '#66bb6a'
+                    - color: white
+              - value: Negative humidity
+                icon: mdi:water-off
+                styles:
+                  card:
+                    - background-color: '#ffa726'
+                    - color: white
+              - value: No notifications
+                icon: mdi:check-circle-outline
+                styles:
+                  card:
+                    - background-color: '#4caf50'
+                    - color: white
+            styles:
+              card:
+                - padding: 2px
+                - border-radius: 50px
+                - height: 100px
+                - width: 500px
+                - justify-content: center
+                - align-items: center
+              label:
+                - font-size: 16px
+                - text-align: center
+                - color: white
+              state:
+                - font-size: 16px
+                - text-align: center
+                - color: white
+          - type: vertical-stack
+            cards:
+              - type: markdown
+                content: >-
+                  <ha-icon icon="mdi:thermometer"></ha-icon>
+                  Temperature:&nbsp;&nbsp; {{
+                  states('sensor.netatmo_1piso_netatmo_exterior_temperature')
+                  }}°C  
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <ha-icon icon="mdi:water-percent"></ha-icon>
+                  Humidity:&nbsp;&nbsp; {{
+                  states('sensor.netatmo_1piso_netatmo_exterior_humidity') }}%  
+                  <br><br> <ha-icon icon="mdi:weather-rainy"></ha-icon>
+                  Precipitation:&nbsp;&nbsp; {{
+                  states('sensor.netatmo_1piso_rain_gauge_precipitation_today')
+                  }} mm
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <ha-icon icon="mdi:weather-windy"></ha-icon> Wind:&nbsp;&nbsp;
+                  {{ states('sensor.netatmo_1piso_anemometer_wind_speed') }}
+                  km/h   <br><br> <ha-icon icon="mdi:compass"></ha-icon> Wind
+                  Direction:&nbsp;&nbsp; {{
+                  states('sensor.netatmo_1piso_anemometer_wind_direction') }}° 
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <ha-icon icon="mdi:gauge"></ha-icon> Pressure:&nbsp;&nbsp; {{
+                  states('sensor.netatmo_1piso_atmospheric_pressure') }} hPa
+                title: Outdoor
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mini-graph-card
+                    name: Living Room
+                    entities:
+                      - entity: sensor.netatmo_1piso_netatmo_sala_temperature
+                        name: Temperature
+                        show_state: true
+                        show_graph: false
+                        color: orange
+                        unit: °C
+                      - entity: sensor.netatmo_1piso_netatmo_sala_humidity
+                        name: Humidity
+                        show_state: true
+                        show_graph: false
+                        unit: '%'
+                      - entity: sensor.netatmo_1piso_noise
+                        name: Noise
+                        show_state: true
+                        show_graph: false
+                        unit: dB
+                      - entity: sensor.netatmo_1piso_netatmo_sala_carbon_dioxide
+                        name: Noise
+                        show_state: true
+                        show_graph: false
+                        unit: ppm
+                  - type: thermostat
+                    entity: climate.altherma_leaving_water_offset
+                    name: ' '
+                    grid_options:
+                      rows: 4
+                      columns: 6
+                    show_current_as_primary: false
+                    card_mod:
+                      style: |
+                        ha-card {
+                          padding: 1px 35px !important;
+                        }
+                        ha-card:after {
+                          content: "Outside {{ states('sensor.altherma_climatecontrol_outdoor_temperature') }}°C";
+                          display: block;
+                          color: white;
+                          font-size: 14px;
+                          padding-top: 4px;
+                          text-align: center;
+                        }
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mini-graph-card
+                    name: Suite
+                    entities:
+                      - entity: sensor.suite_temperatura
+                        name: Temperature
+                        show_graph: false
+                        show_state: true
+                      - entity: sensor.suite_humidade
+                        name: Humidity
+                        show_graph: false
+                        show_state: true
+                      - entity: sensor.netatmo_1piso_carbon_dioxide
+                        name: Temperature
+                        show_graph: false
+                        show_state: true
+                    font_size: 90
+                    height: 30
+                  - type: custom:mini-graph-card
+                    name: Ground Floor Room
+                    entities:
+                      - entity: sensor.quartorc_temperatura
+                        name: Temperature
+                        show_graph: false
+                        show_state: true
+                        color: orange
+                      - entity: sensor.quartorc_humidade
+                        name: Humidity
+                        show_graph: false
+                        show_state: true
+                        color: blue
+                    font_size: 50
+                    height: 30
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mini-graph-card
+                    name: East Room
+                    entities:
+                      - entity: sensor.quartonascente_temperatura
+                        name: Temperature
+                        show_graph: false
+                        show_state: true
+                        color: orange
+                      - entity: sensor.quartonascente_humidade
+                        name: Humidity
+                        show_graph: false
+                        show_state: true
+                        color: blue
+                    font_size: 50
+                    height: 30
+                  - type: custom:mini-graph-card
+                    name: West Room
+                    entities:
+                      - entity: sensor.quartopoente_temperatura
+                        name: Temperature
+                        show_graph: false
+                        show_state: true
+                        color: orange
+                      - entity: sensor.quartopoente_humidade
+                        name: Humidity
+                        show_graph: false
+                        show_state: true
+                        color: blue
+                    font_size: 50
+                    height: 30
+        column_span: 1
+      - type: grid
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                entity: sensor.exportacao_status
+                show_entity_picture: false
+                show_icon: true
+                show_name: false
+                show_state: true
+                show_label: true
+                state_display: |
+                  [[[ return states['sensor.rede_power'].state + " W"; ]]]
+                state:
+                  - value: ultra
+                    icon: mdi:weather-sunny-alert
+                    label: EXCESS SOLAR
+                    styles:
+                      card:
+                        - background-color: '#80dfff'
+                        - color: white
+                  - value: high
+                    icon: mdi:solar-power-variant
+                    label: SOME SOLAR
+                    styles:
+                      card:
+                        - background-color: '#223344'
+                        - color: white
+                  - value: medium
+                    icon: mdi:solar-power
+                    label: PARTIAL SOLAR
+                    styles:
+                      card:
+                        - background-color: '#ffcc80'
+                        - color: white
+                  - value: low
+                    icon: mdi:transmission-tower-export
+                    label: GRID PWR
+                    styles:
+                      card:
+                        - background-color: '#ff8080'
+                        - color: white
+                styles:
+                  card:
+                    - padding: 2px
+                    - border-radius: 50px
+                    - height: 100px
+                    - width: 250px
+                    - justify-content: center
+                    - align-items: center
+                  label:
+                    - font-size: 16px
+                    - text-align: center
+                    - color: white
+                  state:
+                    - font-size: 16px
+                    - text-align: center
+                    - color: white
+              - type: custom:button-card
+                entity: binary_sensor.bthome_sensor_9edb_window
+                show_name: true
+                show_state: false
+                layout: icon_name
+                name: |
+                  [[[ 
+                    const state = entity?.state;
+                    return state === 'on' ? 'Garage Door OPEN' : state === 'off' ? 'Garage Door CLOSED' : 'Garage Door ?';
+                  ]]]
+                tap_action:
+                  action: none
+                hold_action:
+                  action: call-service
+                  service: switch.toggle
+                  service_data:
+                    entity_id: switch.portao_garagem
+                state:
+                  - value: 'off'
+                    color: rgb(92, 184, 92)
+                    icon: mdi:garage
+                  - value: 'on'
+                    color: rgb(255, 193, 7)
+                    icon: mdi:garage-open
+                styles:
+                  card:
+                    - width: 230px
+                    - height: 100px
+                    - padding: 4px
+                    - font-size: 50px
+                    - display: flex
+                    - flex-direction: column
+                    - justify-content: center
+                    - align-items: center
+                    - margin: auto
+                    - border-radius: 35px
+                  icon:
+                    - width: 80px
+                    - height: 80px
+                  name:
+                    - font-size: 14px
+                    - white-space: pre-line
+                    - text-align: center
+                    - margin-top: '-8px'
+          - type: picture-elements
+            elements:
+              - type: custom:power-flow-card-plus
+                style:
+                  top: 65%
+                  left: 50.1%
+                  width: 100%
+                entities:
+                  battery:
+                    entity: sensor.batteries_charge_discharge_power
+                    state_of_charge: sensor.batteries_state_of_capacity
+                    state_of_charge_unit: '%'
+                    show_state_of_charge: true
+                    invert_state: true
+                    state_of_charge_unit_white_space: false
+                  grid:
+                    secondary_info: {}
+                    invert_state: false
+                    entity: sensor.rede_power
+                  solar:
+                    display_zero_state: true
+                    secondary_info: {}
+                    color_value: false
+                    color_icon: false
+                    entity: sensor.soma_dos_3_solares
+                  home:
+                    secondary_info: {}
+                    subtract_individual: false
+                    circle_animation: true
+                    override_state: true
+                    use_metadata: false
+                  individual:
+                    - entity: sensor.bomba_calor_filtered_power
+                      icon: mdi:blank
+                      name: Heat Pump
+                      display_zero: true
+                    - entity: sensor.ev_32_filtered_power
+                      icon: mdi:blank
+                      name: EV_32
+                      display_zero: true
+                    - entity: sensor.bomba_aqs_filtered_power
+                      icon: mdi:blank
+                      name: DHW PUMP
+                      display_zero: true
+                    - entity: sensor.ev_16_filtered_power
+                      icon: mdi:blank
+                      name: EV_16
+                      unit_of_measurement: W
+                      display_zero: true
+                clickable_entities: true
+                display_zero_lines:
+                  mode: show
+                  transparency: 50
+                  grey_color:
+                    - 189
+                    - 189
+                    - 189
+                use_new_flow_rate_model: true
+                w_decimals: 2
+                kw_decimals: 2
+                min_flow_rate: 0.75
+                max_flow_rate: 6
+                max_expected_power: 2000
+                min_expected_power: 0.01
+                watt_threshold: 1000
+                transparency_zero_lines: 0
+                sort_individual_devices: false
+                grid_options:
+                  columns: 12
+                  rows: 6
+              - type: image
+                image: /local/1.png
+                entity: sensor.bomba_aqs_filtered_power
+                style:
+                  top: 20%
+                  left: 88.7%
+                  width: 40px
+              - type: image
+                image: /local/2.png
+                entity: sensor.bomba_calor_filtered_power
+                style:
+                  top: 20%
+                  left: 62.5%
+                  width: 25px
+              - type: image
+                image: /local/5.png
+                entity: sensor.ev_32_filtered_power
+                style:
+                  top: 100%
+                  left: 63%
+                  width: 40px
+              - type: image
+                image: /local/6.png
+                entity: sensor.ev_16_filtered_power
+                style:
+                  top: 99%
+                  left: 88.5%
+                  width: 25px
+              - type: image
+                image: /local/3.png
+                entity: sensor.batteries_state_of_capacity
+                style:
+                  top: 101%
+                  left: 37.5%
+                  width: 25px
+            grid_options:
+              rows: 5.8
+              columns: full
+            image: /local/background.png
+            dark_mode_image: /local/background.png
+          - type: custom:apexcharts-card
+            span:
+              start: day
+            yaxis:
+              - min: 0
+                max: 14
+                apex_config:
+                  tickAmount: 7
+            series:
+              - entity: sensor.consumo_da_casa_em_kw_15min
+                name: Consumption
+                type: line
+                color: salmon
+                stroke_width: 2.5
+                extend_to: false
+              - entity: sensor.producao_solar_em_kw_15min
+                name: Production
+                type: line
+                color: lightgreen
+                stroke_width: 2.5
+                extend_to: false
+              - entity: sensor.ev16_power_em_kw_15min
+                name: EV16
+                type: line
+                color: blue
+                stroke_width: 2.5
+                extend_to: false
+              - entity: sensor.ev32_power_em_kw_15min
+                name: EV32
+                type: line
+                color: purple
+                stroke_width: 2.5
+                extend_to: false
+      - type: grid
+        cards:
+          - show_state: false
+            show_name: false
+            camera_view: live
+            fit_mode: fill
+            type: picture-entity
+            entity: camera.frente_1_transparente
+            camera_image: camera.frente_1_transparente
+            grid_options:
+              columns: 12
+              rows: 4
+          - show_state: false
+            show_name: false
+            camera_view: live
+            fit_mode: fill
+            type: picture-entity
+            entity: camera.garagem_8_fluente
+            camera_image: camera.garagem_8_fluente
+            grid_options:
+              columns: 12
+              rows: 4
+          - type: custom:mod-card
+            style: |
+              ha-card {
+                transform: scale(0.);
+                transform-origin: top left;
+              }
+            card:
+              type: custom:simple-swipe-card
+              cards:
+                - type: custom:vacuum-card
+                  entity: vacuum.roomba_sala
+                  name: Roomba Sala
+                - type: custom:vacuum-card
+                  entity: vacuum.braava_sala
+                  name: Braava Sala
+                - type: custom:vacuum-card
+                  entity: vacuum.roomba_piso
+                  name: Roomba Piso
+                - type: custom:vacuum-card
+                  entity: vacuum.roomba_bunker
+                  name: Roomba Bunker
+                - type: custom:vacuum-card
+                  entity: vacuum.roomba_cave
+                  name: Roomba Cave
+              grid_options:
+                columns: 12
+                rows: 6
+    type: sections
+    max_columns: 3
+    cards: []
+    background:
+      opacity: 100
+      alignment: center
+      size: cover
+      repeat: repeat
+      attachment: fixed
+      image: /api/image/serve/c933faef32c25be35ec60e5b87317f59/original
+    title: Main Dashboard
+    top_margin: false
+    dense_section_placement: false
+    badges: []

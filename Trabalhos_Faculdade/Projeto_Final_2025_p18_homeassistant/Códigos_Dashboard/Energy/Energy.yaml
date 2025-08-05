@@ -1,0 +1,172 @@
+views:
+  - type: sections
+    max_columns: 4
+    path: teste
+    sections:
+      - type: grid
+        cards:
+          - type: picture-elements
+            image: /local/background.jpg
+            elements:
+              - type: custom:sunsynk-power-flow-card
+                style:
+                  top: 0%
+                  left: 50%
+                  width: 100%
+                  height: 0%
+                cardstyle: lite
+                large_font: true
+                show_solar: true
+                show_grid: true
+                show_battery: true
+                decimal_places: 2
+                decimal_places_energy: 2
+                dynamic_line_width: true
+                inverter:
+                  modern: false
+                  colour: lightblue
+                  autarky: energy
+                  auto_scale: false
+                  model: huawei
+                  three_phase: false
+                battery:
+                  energy: 5000
+                  shutdown_soc: 10
+                  invert_power: true
+                  colour: '#fc8d83'
+                  show_daily: false
+                  animation_speed: 5
+                  max_power: 10000
+                  show_absolute: true
+                  auto_scale: true
+                  hide_soc: true
+                  show_remaining_energy: true
+                  dynamic_colour: true
+                  linear_gradient: true
+                solar:
+                  colour: '#F7BC00'
+                  show_daily: true
+                  mppts: 3
+                  animation_speed: 8
+                  max_power: 6600
+                  pv1_name: PV1_M
+                  pv2_name: PV2_M
+                  pv3_name: PV3_S
+                  display_mode: 1
+                  auto_scale: true
+                  dynamic_colour: true
+                  pv1_max_power: 3300
+                  pv2_max_power: 3300
+                  pv3_max_power: 3300
+                  efficiency: 3
+                load:
+                  colour: magenta
+                  show_daily: false
+                  animation_speed: 4
+                  essential_name: Essential
+                  max_power: 15000
+                  additional_loads: 4
+                  load1_name: EV16
+                  load2_name: EV32
+                  load3_name: DHW
+                  load4_name: Heat
+                  load1_icon: mdi:blank
+                  load2_icon: mdi:blank
+                  load3_icon: mdi:blank
+                  load4_icon: mdi:blank
+                  auto_scale: true
+                  dynamic_icon: true
+                  dynamic_colour: true
+                grid:
+                  grid_name: Grid
+                  colour: '#FF2400'
+                  export_colour: green
+                  no_grid_colour: '#a40013'
+                  grid_off_colour: '#e7d59f'
+                  show_nonessential: true
+                  invert_grid: false
+                  animation_speed: 7
+                  max_power: 15000
+                  auto_scale: true
+                  dynamic_icon: true
+                  dynamic_colour: true
+                entities:
+                  day_battery_charge_70: sensor.batteries_day_charge
+                  day_battery_discharge_71: sensor.batteries_day_discharge
+                  day_pv_energy_108: sensor.inverter_daily_yield
+                  grid_power_169: sensor.house_consumption_power
+                  inverter_power_175: sensor.inverters_active_power
+                  inverter_status_59: sensor.inverters_state
+                  dc_transformer_temp_90: sensor.inverter_internal_temperature
+                  pv1_power_186: sensor.pv1_master_power
+                  pv2_power_187: sensor.pv2_master_power
+                  pv3_power_188: sensor.pv1_slave_power
+                  environment_temp: sensor.netatmo_1piso_netatmo_exterior_temperature
+                  pv1_voltage_109: sensor.inverter_pv_1_voltage
+                  pv1_current_110: sensor.inverter_pv_1_current
+                  pv2_voltage_111: sensor.inverter_pv_2_voltage
+                  pv2_current_112: sensor.inverter_pv_2_current
+                  pv3_voltage_113: sensor.inverter_pv_1_voltage_2
+                  pv3_current_114: sensor.inverter_pv_1_current_2
+                  battery_voltage_183: sensor.batteries_bus_voltage
+                  battery_soc_184: sensor.batteries_state_of_capacity
+                  battery_power_190: sensor.batteries_charge_discharge_power
+                  battery_current_191: sensor.batteries_bus_current
+                  battery_temp_182: sensor.battery_1_bms_temperature
+                  battery_status: sensor.batteries_status
+                  essential_power: sensor.consumo_da_casa_novo
+                  essential_load1: sensor.ev_16_filtered_power
+                  essential_load2: sensor.ev_32_filtered_power
+                  essential_load3: sensor.bomba_aqs_filtered_power
+                  essential_load4: sensor.bomba_calor_filtered_power
+                  essential_load1_extra: null
+                  essential_load2_extra: null
+                  essential_load3_extra: null
+                  essential_load4_extra: null
+                  grid_ct_power_172: sensor.rede_power
+                  grid_connected_status_194: sensor.inverters_off_grid_status
+                title_colour:
+                  - 245
+                  - 10
+                  - 34
+                grid_options:
+                  columns: 50
+                  rows: auto
+                wide: false
+                card_height: '1000'
+                card_width: '800'
+              - type: image
+                image: /local/1.png
+                entity: sensor.bomba_aqs_filtered_power
+                style:
+                  top: 60%
+                  left: 70%
+                  width: 60px
+              - type: image
+                image: /local/2.png
+                entity: sensor.bomba_calor_filtered_power
+                style:
+                  top: 60%
+                  left: 66.5%
+                  width: 35px
+              - type: image
+                image: /local/5.png
+                entity: sensor.ev_32_filtered_power
+                style:
+                  top: 30%
+                  left: 69.5%
+                  width: 70px
+              - type: image
+                image: /local/6.png
+                entity: sensor.ev_16_filtered_power
+                style:
+                  top: 30%
+                  left: 66.5%
+                  width: 40px
+            grid_options:
+              columns: 48
+              rows: auto
+        column_span: 4
+    cards: []
+    badges: []
+    title: Flow

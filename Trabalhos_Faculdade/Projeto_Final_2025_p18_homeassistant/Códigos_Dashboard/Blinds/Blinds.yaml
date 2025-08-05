@@ -1,0 +1,102 @@
+views:
+  - title: Blinds
+    sections:
+      - type: grid
+        cards:
+          - type: entities
+            title: Bedrooms
+            entities:
+              - entity: cover.quarto_nascente
+                secondary_info: position
+              - entity: cover.quarto_poente
+                secondary_info: position
+              - entity: cover.quarto_rchao
+                secondary_info: position
+          - type: entities
+            entities:
+              - entity: cover.cozinha
+                secondary_info: position
+                name: ____________
+            title: Kitchen
+            grid_options:
+              columns: 12
+              rows: auto
+          - type: entities
+            entities:
+              - entity: cover.varanda_1piso
+                secondary_info: position
+                name: _____________
+            title: Balcony
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: cover.wc_1piso
+                secondary_info: position
+              - entity: cover.wc_rchao
+                secondary_info: position
+              - entity: cover.wc_suite_fixo
+                secondary_info: position
+            title: WC´s
+          - type: entities
+            entities:
+              - entity: cover.lavandaria
+                secondary_info: position
+                name: _____________
+            title: Laundry
+          - type: entities
+            entities:
+              - entity: cover.alpendre_fixo
+                secondary_info: position
+                name: ____________
+            title: Porch
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: cover.fixo_suite
+                secondary_info: position
+              - entity: cover.porta_suite
+                secondary_info: position
+            title: Suite
+          - type: entities
+            entities:
+              - entity: cover.sala
+                secondary_info: position
+                name: ___________
+            title: Living Room
+    cards:
+      - type: entities
+        entities:
+          - entity: cover.escritorio
+            secondary_info: position
+        title: Escritório
+      - type: entities
+        entities:
+          - entity: cover.fixo_suite
+            secondary_info: position
+        title: Fixo_Suite
+      - type: entities
+        entities:
+          - entity: cover.lavandaria
+            secondary_info: position
+        title: Lavandaria
+      - type: entities
+        entities:
+          - entity: cover.porta_suite
+            secondary_info: position
+        title: Porta_Suite
+      - type: entities
+        entities:
+          - entity: cover.quarto_nascente
+            secondary_info: position
+        title: Quarto_Nascente
+    background:
+      opacity: 100
+      alignment: center
+      size: cover
+      repeat: repeat
+      attachment: fixed
+      image: /api/image/serve/778daab85982b2ee7b0804c2e0333774/original
+    type: sections
+    max_columns: 4

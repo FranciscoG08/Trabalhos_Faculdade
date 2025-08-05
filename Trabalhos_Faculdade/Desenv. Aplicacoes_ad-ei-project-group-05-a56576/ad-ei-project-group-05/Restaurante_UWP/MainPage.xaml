@@ -1,0 +1,65 @@
+﻿<Page
+    x:Class="Restaurante_UWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Restaurante_UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Background>
+        <ImageBrush ImageSource="Assets/BackgroundImage.png" Stretch="UniformToFill" />
+    </Page.Background>
+
+    <Grid>
+        <NavigationView IsBackButtonVisible="Collapsed" IsSettingsVisible="False"
+                x:Name="nvMain" ItemInvoked="nvMain_ItemInvoked"
+                PaneTitle="{x:Bind EmpregadoViewModel.LoggedEmpregado.Nome, Mode=OneWay}">
+            <NavigationView.MenuItems>
+                <NavigationViewItem x:Name="nvCategorias" Content="Categorias"
+                            Icon="Library" Tag="categorias"
+                            Visibility="{x:Bind EmpregadoViewModel.IsAdmin, Mode=OneWay}"/>
+
+                <NavigationViewItem x:Name="nvProdutos" Content="Produtos"
+                            Icon="Shop" Tag="produtos"
+                            Visibility="{x:Bind EmpregadoViewModel.IsAdmin, Mode=OneWay}"/>
+
+                <NavigationViewItem x:Name="nvEmpregado" Content="Empregados"
+                            Icon="OtherUser" Tag="empregados"
+                            Visibility="{x:Bind EmpregadoViewModel.IsAdmin, Mode=OneWay}"/>
+
+                <NavigationViewItem x:Name="nvMesa" Content="Mesas"
+                            Icon="Placeholder" Tag="mesas"
+                            Visibility="{x:Bind EmpregadoViewModel.IsAdmin, Mode=OneWay}"/>
+
+                <NavigationViewItem x:Name="nvPedidos" Content="Pedidos"
+                            Icon="List" Tag="pedidos"
+                            Visibility="{x:Bind EmpregadoViewModel.IsLogged, Mode=OneWay}"/>
+            </NavigationView.MenuItems>
+
+            <NavigationView.PaneFooter>
+                <StackPanel>
+                    <NavigationViewItem x:Name="nvLogin" Content="Login"
+                                Icon="Permissions"
+                                Tapped="nvLogin_Tapped"
+                                Visibility="{x:Bind EmpregadoViewModel.IsNotLogged,Mode=OneWay}"/>
+
+                    <NavigationViewItem x:Name="nvLogout" Content="Logout"
+                                Icon="NewWindow"
+                                Tapped="nvLogout_Tapped"
+                                Visibility="{x:Bind EmpregadoViewModel.IsLogged,Mode=OneWay}"/>
+
+                    <NavigationViewItem x:Name="nvRegister" Content="Register"
+                                Icon="ContactInfo"
+                                Tapped="nvRegister_Tapped"
+                                Visibility="{x:Bind EmpregadoViewModel.IsNotLogged,Mode=OneWay}"/>
+                </StackPanel>
+            </NavigationView.PaneFooter>
+
+            <Frame x:Name="frmMain"  >
+                <TextBlock FontWeight="Bold" Text="BOM TRABALHO" Foreground="PaleGoldenrod" HorizontalAlignment="Center" Padding="25" />
+            </Frame>
+
+        </NavigationView>
+    </Grid>
+</Page>

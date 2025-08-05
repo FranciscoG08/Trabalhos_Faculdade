@@ -1,0 +1,4 @@
+# Energia diaria consumida
+daily_consumed_energy:
+  source: sensor.power_meter_consumption
+  cycle: daily

@@ -1,0 +1,23 @@
+# EV mostra 0W em standby
+- sensor:
+    - name: "EV_16 Filtered Power"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% if states('sensor.ev_16a_power')|float < 50 %}
+          0
+        {% else %}
+          {{ states('sensor.ev_16a_power') }}
+        {% endif %}
+
+    - name: "EV_32 Filtered Power"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% if states('sensor.ev_32a_power')|float < 50 %}
+          0
+        {% else %}
+          {{ states('sensor.ev_32a_power') }}
+        {% endif %}

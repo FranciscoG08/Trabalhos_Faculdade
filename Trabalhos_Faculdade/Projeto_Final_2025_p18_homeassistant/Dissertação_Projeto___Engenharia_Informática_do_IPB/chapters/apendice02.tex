@@ -1,0 +1,305 @@
+\chapter{Apêndice B – Listagens de Código e
+Detalhes Técnicos
+}
+\label{apendice2}
+
+Os códigos desenvolvidos e os detalhes técnicos do projeto podem ser encontrados no repositório disponível em: \url{https://gitlab.estig.ipb.pt/projetos_ei/2025_p18_homeassistant}.
+
+\section{Código das bombas}
+
+\lstset{inputencoding=ascii}
+\begin{lstlisting}[language=YAML, caption={pumps.yaml}]
+# Pumps mostram 0W em standby
+- sensor:
+    - name: "Bomba AQS Filtered Power"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% if states('sensor.bomba_aqs_power')|float < 50 %}
+          0
+        {% else %}
+          {{ states('sensor.bomba_aqs_power') }}
+        {% endif %}
+
+    - name: "Bomba Calor Filtered Power"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% if states('sensor.bomba_calor_power')|float < 200 %}
+          0
+        {% else %}
+          {{ states('sensor.bomba_calor_power') }}
+        {% endif %}
+
+    - name: "Heat Pump Daily Consumption"
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: >
+        {{ (
+          states('sensor.altherma_climatecontrol_cooling_daily_electrical_consumption') | float(0) +
+          states('sensor.altherma_climatecontrol_heating_daily_electrical_consumption') | float(0)
+        ) | round(2) }}
+
+\end{lstlisting}
+
+
+\section{Código dos carregadores}
+
+\lstset{inputencoding=ascii}
+\begin{lstlisting}[language=YAML, caption={ev.yaml}]
+# EV mostra 0W em standby
+- sensor:
+    - name: "EV_16 Filtered Power"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% if states('sensor.ev_16a_power')|float < 50 %}
+          0
+        {% else %}
+          {{ states('sensor.ev_16a_power') }}
+        {% endif %}
+
+    - name: "EV_32 Filtered Power"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% if states('sensor.ev_32a_power')|float < 50 %}
+          0
+        {% else %}
+          {{ states('sensor.ev_32a_power') }}
+        {% endif %}
+
+\end{lstlisting}
+
+\section{Código das notificações}
+
+\lstset{inputencoding=ascii}
+\begin{lstlisting}[language=YAML, caption={notifications.yaml}]
+# Sensor de Alerta
+- sensor:
+    - name: "Estado de Alerta"
+      unique_id: estado_alerta
+      state: >
+        {% if is_state('switch.portao_garagem', 'on') %}
+          Open gate
+        {% elif states('sensor.netatmo_1piso_rain_gauge_precipitation') | float > 0.1 %}
+          Rain
+        {% elif states('sensor.netatmo_1piso_carbon_dioxide') | float > 1000 %}
+          High CO2
+        {% elif states('sensor.netatmo_1piso_noise') | float > 60 %}
+          High Noise
+        {% elif is_state('vacuum.roomba_sala', 'cleaning')
+           or is_state('vacuum.braava_sala', 'cleaning')
+           or is_state('vacuum.roomba_piso', 'cleaning')
+           or is_state('vacuum.roomba_bunker', 'cleaning')
+           or is_state('vacuum.roomba_cave', 'cleaning') %}
+          Robot cleaning
+        {% elif states('sensor.bomba_calor_filtered_power') | float > 0 %}
+          Heat pump connected
+        {% elif states('sensor.bomba_aqs_filtered_power') | float > 0 %}
+          DHW pump connected
+        {% elif states('sensor.netatmo_1piso_anemometer_wind_speed') | float > 40 %}
+          Strong wind
+        {% elif states('sensor.netatmo_1piso_netatmo_exterior_temperature') | float < 0 %}
+          Negative temperature
+        {% elif states('sensor.netatmo_1piso_netatmo_exterior_humidity') | float > 85 %}
+          High humidity
+        {% elif states('sensor.netatmo_1piso_netatmo_exterior_humidity') | float < 30 %}
+          Low humidity
+        {% else %}
+          All clean
+        {% endif %}
+
+
+\end{lstlisting}
+
+
+\section{Código do consumo da casa}
+
+\lstset{inputencoding=ascii}
+\begin{lstlisting}[language=YAML, caption={house\_consumption.yaml}]
+#Necessario para o card energy
+- sensor:
+    - name: "Consumo da Casa novo"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% set solar = states('sensor.solar_total') | float(0) %}
+        {% set battery_power = states('sensor.batteries_charge_discharge_power') %}
+        {% set grid_power = states('sensor.rede_power') %}
+
+        {% if battery_power in ['unknown', 'unavailable', 'null', None] or
+              grid_power in ['unknown', 'unavailable', 'null', None] %}
+          unavailable
+        {% else %}
+          {% set battery_power = battery_power | float(0) %}
+          {% set grid_power = grid_power | float(0) %}
+
+          {% set charging_battery = battery_power if battery_power > 0 else 0 %}
+          {% set from_battery = -battery_power if battery_power < 0 else 0 %}
+          {% set from_grid = grid_power if grid_power > 0 else 0 %}
+          {% set to_grid = -grid_power if grid_power < 0 else 0 %}
+
+          {% set consumo = solar - charging_battery - to_grid + from_battery + from_grid %}
+          {{ consumo | round(2) }}
+        {% endif %}
+
+
+\end{lstlisting}
+
+\section{Código do estado exportação da rede}
+
+\lstset{inputencoding=ascii}
+\begin{lstlisting}[language=YAML, caption={grid.yaml}]
+# Botao de exportacao
+- sensor:
+    - name: "Exportacao_Status"
+      unique_id: exportacao_status
+      state: >
+        {% set export = states('sensor.rede_power') | float(0) %}
+
+        {% if export < -3000 %}
+          ultra
+        {% elif export < -1000 %}
+          high
+        {% elif export <= -500 %}
+          medium
+        {% else %}
+          low
+        {% endif %}
+
+
+
+\end{lstlisting}
+
+
+
+\section{Código do conversão do gráfico para 15min}
+
+\lstset{inputencoding=ascii}
+\begin{lstlisting}[language=YAML, caption={conversion\_grafic\_15min.yaml}]
+#Conversao para graficos e atualizacoes em 15 min
+- trigger:
+    - platform: time_pattern
+      minutes: "/15"
+  sensor:
+    - name: "Consumo da Casa em kW (15min)"
+      unit_of_measurement: "kW"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.consumo_da_casa_novo') | float(0) / 1000) | round(2) }}
+
+    - name: "Produção Solar em kW (15min)"
+      unit_of_measurement: "kW"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.solar_total') | float(0) / 1000) | round(2) }}
+
+    - name: "EV16 Power em kW (15min)"
+      unit_of_measurement: "kW"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.ev_16a_power') | float(0) / 1000) | round(2) }}
+
+    - name: "EV32 Power em kW (15min)"
+      unit_of_measurement: "kW"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.ev_32a_power') | float(0) / 1000) | round(2) }}
+
+
+\end{lstlisting}
+
+\section{Código das conversões}
+
+\lstset{inputencoding=ascii}
+\begin{lstlisting}[language=YAML, caption={conversions.yaml}]
+ # CONVERSOES PARA OS GRAFICOS
+- sensor:
+    - name: "Consumo da Casa em kW"
+      unit_of_measurement: "kW"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.consumo_da_casa_novo') | float(0) / 1000) | round(2) }}
+
+    - name: "Produção Solar em kW"
+      unit_of_measurement: "kW"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.solar_total') | float(0) / 1000) | round(2) }}
+
+    - name: "EV16 Power em kW"
+      unit_of_measurement: "kW"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.ev_16a_power') | float(0) / 1000) | round(2) }}
+
+    - name: "EV32 Power em kW"
+      unit_of_measurement: "kW"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.ev_32a_power') | float(0) / 1000) | round(2) }}
+
+
+\end{lstlisting}
+
+\section{Código do solar}
+
+\lstset{inputencoding=ascii}
+\begin{lstlisting}[language=YAML, caption={conversions.yaml}]
+# Saida de casa Solar
+- sensor:
+    - name: "PV1 Master Power"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.inverter_pv_1_current') | float(0) * states('sensor.inverter_pv_1_voltage') | float(0)) | round(2) }}
+
+    - name: "PV2 Master Power"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.inverter_pv_2_current') | float(0) * states('sensor.inverter_pv_2_voltage') | float(0)) | round(2) }}
+
+    - name: "PV1 Slave Power"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {{ (states('sensor.inverter_pv_1_voltage_2') | float(0) * states('sensor.inverter_pv_1_current_2') | float(0)) | round(2) }}
+
+# Soma dos 2 inversores
+    - name: "Solar Total"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% set a = states('sensor.inverter_input_power') | float(0) %}
+        {% set b = states('sensor.inverter_input_power_2') | float(0) %}
+        {{ a + b }}
+        
+    - name: "Soma dos 3 Solares"
+      unit_of_measurement: "W"
+      state: >
+          {% set s1 = states('sensor.pv1_master_power') | float(0) %}
+          {% set s2 = states('sensor.pv1_slave_power') | float(0) %}
+          {% set s3 = states('sensor.pv2_master_power') | float(0) %}
+          {{ (s1 + s2 + s3) | round(2) }}
+
+\end{lstlisting}

@@ -1,0 +1,89 @@
+views:
+  - type: sections
+    max_columns: 4
+    title: Pumps
+    path: bombas
+    sections:
+      - type: grid
+        cards:
+          - chart_type: line
+            period: hour
+            type: statistics-graph
+            entities:
+              - entity: sensor.bomba_aqs_power
+                name: DHW_Pump power
+              - entity: sensor.bomba_calor_power
+                name: Heat_Pump power
+            stat_types:
+              - mean
+            days_to_show: 1
+            hide_legend: false
+            logarithmic_scale: false
+            title: Consumption
+            grid_options:
+              columns: 12
+              rows: 6
+          - type: thermostat
+            entity: climate.altherma_leaving_water_offset
+            grid_options:
+              columns: 12
+              rows: 8
+            features:
+              - type: climate-hvac-modes
+      - type: grid
+        cards:
+          - type: history-graph
+            entities:
+              - entity: sensor.daily_bomba_aqs_energy
+                name: Daily_DHW
+              - entity: sensor.heat_pump_daily_consumption
+                name: Daily_Heat Pump
+            title: Daily Consumption
+            hours_to_show: 24
+            refresh_interval: 60
+            grid_options:
+              columns: 12
+              rows: 6
+          - type: thermostat
+            entity: climate.altherma_leaving_water_temperature
+            grid_options:
+              columns: 12
+              rows: 8
+            features:
+              - type: climate-hvac-modes
+      - type: grid
+        cards:
+          - type: entities
+            entities:
+              - entity: sensor.bomba_aqs_energy
+                name: Energy
+              - entity: sensor.bomba_aqs_power
+                name: Power
+              - entity: sensor.bomba_aqs_voltage
+                name: Voltage
+              - entity: sensor.bomba_aqs_power_factor
+                name: Power factor
+            title: DHW
+          - type: entities
+            entities:
+              - entity: sensor.bomba_calor_energy
+                name: Energy
+              - entity: sensor.bomba_calor_power
+                name: Power
+              - entity: sensor.bomba_calor_voltage
+                name: Voltage
+              - entity: sensor.bomba_calor_power_factor
+                name: Power factor
+            title: Heat Pump
+          - type: entities
+            entities:
+              - entity: sensor.home_pfo_temperatura_exterior
+              - entity: sensor.altherma_climatecontrol_target_temperature
+    cards: []
+    background:
+      opacity: 100
+      alignment: center
+      size: cover
+      repeat: repeat
+      attachment: fixed
+    badges: []

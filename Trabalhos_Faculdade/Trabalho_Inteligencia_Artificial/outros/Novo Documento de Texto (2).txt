@@ -1,0 +1,29 @@
+Estrutura do Trabalho
+Carregamento e pré-processamento dos dados
+
+Importar as bibliotecas necessárias.
+Carregar o arquivo dataset.csv.
+Realizar limpeza, normalização e codificação dos dados (transformação de dados categóricos, normalização do índice de massa corporal, etc.).
+Exploração de dados
+
+Analisar as distribuições de custos e variáveis para melhor entendimento.
+Criar gráficos para entender relações entre variáveis (opcional).
+Divisão do conjunto de dados
+
+Dividir os dados em treino e teste (e.g., 80% treino, 20% teste).
+Treinamento do modelo SVM
+
+Treinar um modelo SVM para prever os custos de saúde.
+Avaliação do modelo
+
+Avaliar a performance do modelo usando métricas como MSE, RMSE, ou R².
+Estimativa de custos
+
+Usar o modelo para prever os custos no arquivo just_features.csv.
+Análise da importância das características
+
+Usar técnicas de "Permutação de Importância" ou "SHAP Values" para identificar as características mais relevantes.
+Salvar os resultados
+
+Gerar o arquivo grupo#_custos_estimados.csv.
+Exportar a solução para grupo#_solucao.ipynb.

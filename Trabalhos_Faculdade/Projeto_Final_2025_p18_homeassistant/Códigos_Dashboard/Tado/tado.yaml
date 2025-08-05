@@ -1,0 +1,194 @@
+views:
+  - title: TADO
+    type: sections
+    max_columns: 5
+    background:
+      opacity: 100
+      alignment: center
+      size: cover
+      repeat: repeat
+      attachment: fixed
+      image: /api/image/serve/2279c1e5bd5569974c7896d4d94a9cea/original
+    dense_section_placement: true
+    top_margin: false
+    sections:
+      - type: grid
+        column_span: 3
+        cards:
+          - type: custom:stack-in-card
+            mode: vertical
+            cards:
+              - type: thermostat
+                entity: climate.quartonascente
+                name: East Bedroom
+                card_mod:
+                  style: |
+                    ha-card {
+                      padding: 8px !important;
+                      max-height: 400px !important;
+                    }
+              - type: custom:button-card
+                entity: sensor.quartonascente_humidade
+                name: Humidity
+                icon: mdi:water-percent
+                show_state: true
+                show_name: true
+                styles:
+                  card:
+                    - background: transparent
+                    - box-shadow: none
+                    - padding: 4px
+                  name:
+                    - font-size: 12px
+                    - text-align: center
+                    - color: var(--secondary-text-color)
+                  state:
+                    - font-size: 16px
+                    - font-weight: 500
+                    - text-align: center
+                  icon:
+                    - color: '#1e88e5'
+                    - width: 16px
+                    - height: 16px
+          - type: custom:stack-in-card
+            mode: vertical
+            cards:
+              - type: thermostat
+                entity: climate.suite
+                name: Suite
+                card_mod:
+                  style: |
+                    ha-card {
+                      padding: 8px !important;
+                      max-height: 400px !important;
+                    }
+              - type: custom:button-card
+                entity: sensor.suite_humidade
+                name: Humidity
+                icon: mdi:water-percent
+                show_state: true
+                show_name: true
+                styles:
+                  card:
+                    - background: transparent
+                    - box-shadow: none
+                    - padding: 4px
+                  name:
+                    - font-size: 12px
+                    - text-align: center
+                    - color: var(--secondary-text-color)
+                  state:
+                    - font-size: 16px
+                    - font-weight: 500
+                    - text-align: center
+                  icon:
+                    - color: '#1e88e5'
+                    - width: 16px
+                    - height: 16px
+          - type: custom:stack-in-card
+            mode: vertical
+            cards:
+              - type: thermostat
+                entity: climate.sala
+                name: Living Room
+                card_mod:
+                  style: |
+                    ha-card {
+                      padding: 8px !important;
+                      max-height: 400px !important;
+                    }
+              - type: custom:button-card
+                entity: sensor.sala_humidade
+                name: Humidity
+                icon: mdi:water-percent
+                show_state: true
+                show_name: true
+                styles:
+                  card:
+                    - background: transparent
+                    - box-shadow: none
+                    - padding: 4px
+                  name:
+                    - font-size: 12px
+                    - text-align: center
+                    - color: var(--secondary-text-color)
+                  state:
+                    - font-size: 16px
+                    - font-weight: 500
+                    - text-align: center
+                  icon:
+                    - color: '#1e88e5'
+                    - width: 16px
+                    - height: 16px
+          - type: custom:stack-in-card
+            mode: vertical
+            cards:
+              - type: thermostat
+                entity: climate.quartopoente
+                name: West Bedroom
+                card_mod:
+                  style: |
+                    ha-card {
+                      padding: 8px !important;
+                      max-height: 400px !important;
+                    }
+              - type: custom:button-card
+                entity: sensor.quartopoente_humidade
+                name: Humidity
+                icon: mdi:water-percent
+                show_state: true
+                show_name: true
+                styles:
+                  card:
+                    - background: transparent
+                    - box-shadow: none
+                    - padding: 4px
+                  name:
+                    - font-size: 12px
+                    - text-align: center
+                    - color: var(--secondary-text-color)
+                  state:
+                    - font-size: 16px
+                    - font-weight: 500
+                    - text-align: center
+                  icon:
+                    - color: '#1e88e5'
+                    - width: 16px
+                    - height: 16px
+          - type: custom:stack-in-card
+            mode: vertical
+            cards:
+              - type: thermostat
+                entity: climate.quartorc
+                name: Ground Floor Bedroom
+                card_mod:
+                  style: |
+                    ha-card {
+                      padding: 8px !important;
+                      max-height: 400px !important;
+                    }
+              - type: custom:button-card
+                entity: sensor.quartorc_humidade
+                name: Humidity
+                icon: mdi:water-percent
+                show_state: true
+                show_name: true
+                styles:
+                  card:
+                    - background: transparent
+                    - box-shadow: none
+                    - padding: 4px
+                  name:
+                    - font-size: 12px
+                    - text-align: center
+                    - color: var(--secondary-text-color)
+                  state:
+                    - font-size: 16px
+                    - font-weight: 500
+                    - text-align: center
+                  icon:
+                    - color: '#1e88e5'
+                    - width: 16px
+                    - height: 16px
+    badges: []
+    cards: []

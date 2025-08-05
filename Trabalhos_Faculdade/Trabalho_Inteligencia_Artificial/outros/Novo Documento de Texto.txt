@@ -1,0 +1,62 @@
+IMC
+Quantidade de outliers em 'imc' a ser eliminada:  18
+       imc
+320   67.8
+355    4.6
+564   47.7
+711   47.6
+727   83.1
+755   50.2
+762   53.2
+936   48.3
+1059   5.3
+1083  47.6
+1378  52.6
+1494   6.7
+1611  49.1
+1739  47.9
+1773  70.3
+1823   3.4
+2049  47.6
+2092  53.1
+
+CUSTO
+Quantidade de outliers em 'custo' a ser eliminada:  227
+        custo
+0     18213.9
+6     20404.7
+11    18543.3
+28    15671.2
+29    18371.0
+...       ...
+2142  18959.9
+2154  20113.6
+2166  17141.7
+2181  18184.0
+2195  18808.3
+
+2215-2197 = 18
+2215-227-18 = 1970
+2215- 12-3 = 2200 -> FATOR = 3
+
+Linhas com outliers em 'custo' ou 'imc': 9 em comum FATOR = 3
+
+         genero estado_civil zona_residencia   imc fumador       class_etaria  \
+320*   masculino     separado       suburbana  67.8     nao              jovem   
+355    feminino     solteiro          urbana   4.6     nao        adolescente   
+727*  masculino     solteiro       suburbana  83.1     nao      adulto_senior   
+755   masculino     separado       suburbana  50.2     nao              jovem   
+762   masculino     solteiro       suburbana  53.2     nao        adolescente   
+993*   masculino     separado       suburbana  30.4     sim  adulto_meia_idade   
+1059  masculino     solteiro           rural   5.3     nao        adolescente   
+1120*  masculino       casado          urbana  34.4     sim      adulto_senior   
+1307   feminino       casado           rural  38.2     sim       adulto_jovem   
+1378  masculino       casado       suburbana  52.6     sim              jovem   
+1494   feminino       casado           rural   6.7     sim       adulto_jovem   
+1667*  masculino       casado          urbana  34.4     sim      adulto_senior   
+1773*  masculino       casado       suburbana  70.3     sim              jovem   
+1823   feminino       casado           rural   3.4     nao  adulto_meia_idade   
+1862*  masculino     separado       suburbana  30.5     sim  adulto_meia_idade   
+1973*   feminino     separado       suburbana  47.4     sim      adulto_senior   
+2049*   feminino     separado       suburbana  47.6     sim      adulto_senior   
+2092  masculino     solteiro       suburbana  53.1     nao        adolescente   

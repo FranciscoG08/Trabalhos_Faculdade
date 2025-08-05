@@ -1,0 +1,309 @@
+h1{
+
+    text-align: center;
+    color:#0D3B66;
+    font-weight: bold !important;
+
+}
+
+h5{
+    color: #0D3B66;
+}
+
+textoNA{/*texto das caixas de textos nos ajudamos */
+    font-size: 20px;
+    color: #0D3B66;
+}
+
+textoNA p{
+    font-size: 29px;
+}
+
+.card{
+
+    background-color: #FAF0CA;
+    background: linear-gradient(90deg, rgb(240, 219, 135) 30%, rgb(223, 222, 217) 50%, rgba(240, 219, 135) 70%);
+    border-radius: 10px;
+    outline:none;
+
+}
+
+.card-header{
+
+    border-radius: 10px;
+    
+}
+
+.card-body{
+
+    border-radius: 10px;
+
+}
+
+.fundo_cards{
+
+    background-color: #FAF0CA;
+    background: linear-gradient(90deg, rgb(240, 219, 135) 30%, rgb(223, 222, 217) 50%, rgba(240, 219, 135) 70%);
+    border-radius: 10px;
+    
+}
+
+.fundo_in_cards{
+
+    background-color: #FAF0CA;
+    border-radius: 10px;
+    
+}
+
+.espacamento_cards {
+
+    margin-bottom: 0.2cm;
+    border-radius: 10px;
+    
+}
+.espacamento_cards2 {
+
+  margin-bottom: 1.5cm;
+  border-radius: 10px;
+
+}
+
+.fundotexto{/*muda a cor de cada caixa de texto*/
+    background-color: #FAF0CA;
+    background: linear-gradient(90deg, rgb(240, 219, 135) 30%, rgb(223, 222, 217) 50%, rgba(240, 219, 135) 70%);
+    height: 30vh;
+    padding-bottom: 30%;
+    padding-top: 20%;
+}
+
+.box_texto{/*a caixa de texto */
+
+    border-bottom: 2px solid rgba(13, 59, 102, 0.2);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    text-align:center;
+
+}
+
+.caixas{/*caixa onde esta inserido todo o texto */
+    padding-top: 10%;;
+    padding-bottom: 10%;
+}
+
+.botao{
+
+    position: relative;
+    border-radius: 10px;
+    padding: 15px 30px;
+    font-size: 20px; 
+    padding-bottom: 100px;
+
+}
+
+.fundo1{
+    background: rgb(244,211,94);
+    background: linear-gradient(90deg, rgba(244,211,94,1) 40%, rgba(250,240,202,1) 50%, rgba(244,211,94,1) 60%);
+    box-shadow: 0px 10px 10px -10px rgba(0, 0, 0, 0.5);
+
+}
+
+.botaoajudamos{
+
+    background-color: #F95738; 
+    border: 0.001cm solid #EE964B;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);;
+    border-radius: 10px;
+    font-size: 25px;
+    font-weight: bold;
+    width:400px;
+    height:50px;
+    color:#FAF0CA;
+    position: relative;
+
+
+}
+
+
+.background_coral{
+
+    width: 100%;
+    height: 100px;
+    background: lightcoral;
+    box-sizing: border-box; 
+    display:flex;
+    align-items: center;
+
+}
+
+#logos{
+    width: 50px;
+}
+
+.formcontrol{
+    width: 300px;
+    font-family: Arial, sans-serif;
+    padding: 8px;
+    border: 1px solid rgba(75, 75, 75, 0.505);
+    border-radius: 4px;
+}
+
+@keyframes efeito_cor_encontre { /* < Animação do Hover no botao encontre > */
+    0% {
+        background-color: #f82900;
+        border-radius: 10px;
+    }
+    50% {
+        background-color: #f82900;
+        border-radius: 10px;
+    }
+    100% {
+        background-color: #f82900 20%;
+        border-radius: 10px;
+    }
+    
+}
+
+.botaoanim:hover{ /* < Hover: Animação do Botao Login > */
+
+    text-decoration: underline #FAF0CA;
+    animation: efeito_cor_encontre 1s ease;
+
+}
+
+.radio{
+
+    text-align: left;
+    padding-left: 0.5cm;
+
+}
+
+.margem_pequena{
+
+    margin-top: 10px;
+    margin-bottom: 30px;
+
+}
+
+.margem_pequena p{
+
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+
+.box{
+
+    background-color:#0D3B66;
+    color:#FAF0CA;
+    text-align: left;
+    height: 440px;
+    padding-left: 1cm;
+    padding-right: 1cm;
+    font-size: 15px;
+    border-radius: 10px; 
+    margin-left: 5px;
+    padding-top: 30px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 1);
+
+
+}
+
+.FIM{
+    font-size: 15px;
+    color:#0D3B66;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+.icon {
+    color: #0D3B66; 
+    font-size: 5px; 
+    margin-left: 8px;
+}
+
+.dropdown-buttons{
+    position: relative;
+    flex-direction: column;
+}
+
+.coluna_1{
+    background-color: #0D3B66;
+}
+
+/*Icons*/
+.redes{
+    width: 100%;
+    height: 100px;
+    background: rgb(238,150,75);
+    background: linear-gradient(90deg, rgba(238,150,75,1) 0%, rgba(244,211,94,1) 40%, rgba(250,240,202,1) 50%, rgba(244,211,94,1) 60%, rgba(238,150,75,1) 100%);
+    box-shadow: 0px 10px 10px -10px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box; 
+    position: relative;
+    z-index: 1;
+}
+
+.redes h4 {
+    margin-left: 30px;
+    font-size: 45px;
+    font-weight: bolder;
+    color: #FAF0CA;
+}
+
+.butao_icon{
+    position: absolute;
+    z-index: 1;
+    margin-bottom: 90px; 
+    margin-right: 50px;
+    border-radius: 50px; 
+}
+
+.icon-1:hover {
+    box-shadow: 0 0 30px #FAF0CA; 
+    border-radius: 50px; 
+}
+
+.icon-2:hover {
+    box-shadow: 0 0 30px #FAF0CA; 
+    border-radius: 50px; 
+}
+
+.icon-3:hover {
+    box-shadow: 0 0 30px #FAF0CA; 
+    border-radius: 50px; 
+}
+
+.icon-4:hover {
+    box-shadow: 0 0 30px #FAF0CA;
+    border-radius: 50px; 
+}
+
+.background_orange{
+    width: 100%;
+    height: 300px;
+    background: rgb(238,150,75);
+    background: linear-gradient(90deg, rgba(238,150,75,1) 0%, rgba(244,211,94,1) 40%, rgba(250,240,202,1) 50%, rgba(244,211,94,1) 60%, rgba(238,150,75,1) 100%);
+    box-sizing: border-box; 
+    z-index: 0;
+}
+
+.background_orange h3 {
+    font-size: 23px;
+    color:#0D3B66;
+    font-weight: bolder;
+    margin-top: 14px;
+    margin-left: 10px;
+    margin-bottom: 6px;
+}
+
+.row_hiperlinks{
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+

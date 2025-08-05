@@ -1,0 +1,4 @@
+# Energia diaria exportada
+daily_exported_energy:
+  source: sensor.power_meter_exported
+  cycle: daily

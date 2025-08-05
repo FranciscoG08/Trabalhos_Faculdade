@@ -1,0 +1,34 @@
+# Sensor de Alerta
+- sensor:
+    - name: "Estado de Alerta"
+      unique_id: estado_alerta
+      state: >
+        {% if is_state('switch.portao_garagem', 'on') %}
+          Open gate
+        {% elif states('sensor.netatmo_1piso_rain_gauge_precipitation') | float > 0.1 %}
+          Rain
+        {% elif states('sensor.netatmo_1piso_carbon_dioxide') | float > 1000 %}
+          High CO₂
+        {% elif states('sensor.netatmo_1piso_noise') | float > 60 %}
+          High Noise
+        {% elif is_state('vacuum.roomba_sala', 'cleaning')
+           or is_state('vacuum.braava_sala', 'cleaning')
+           or is_state('vacuum.roomba_piso', 'cleaning')
+           or is_state('vacuum.roomba_bunker', 'cleaning')
+           or is_state('vacuum.roomba_cave', 'cleaning') %}
+          Robot cleaning
+        {% elif states('sensor.bomba_calor_filtered_power') | float > 0 %}
+          Heat pump connected
+        {% elif states('sensor.bomba_aqs_filtered_power') | float > 0 %}
+          DHW pump connected
+        {% elif states('sensor.netatmo_1piso_anemometer_wind_speed') | float > 40 %}
+          Strong wind
+        {% elif states('sensor.netatmo_1piso_netatmo_exterior_temperature') | float < 0 %}
+          Negative temperature
+        {% elif states('sensor.netatmo_1piso_netatmo_exterior_humidity') | float > 85 %}
+          High humidity
+        {% elif states('sensor.netatmo_1piso_netatmo_exterior_humidity') | float < 30 %}
+          Low humidity
+        {% else %}
+          All clean
+        {% endif %}

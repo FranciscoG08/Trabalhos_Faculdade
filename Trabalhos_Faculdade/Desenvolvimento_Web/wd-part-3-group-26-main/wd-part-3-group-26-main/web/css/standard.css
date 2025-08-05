@@ -1,0 +1,171 @@
+/*NAVBAR*/
+.Navbar { /* < Caracterização da Nav Bar > */
+   
+   
+  
+    
+    background-color: #f3e29f;
+    border-bottom: 0.11vh solid rgba(13, 59, 102, 0.2);
+    box-shadow: 0vh 0.44vh 0.44vh rgba(0, 0, 0, 0.1);
+ 
+   
+
+   
+    
+}
+
+
+.navbar-brand img {
+    height: 75px;
+    width: 275px;
+    position:relative;
+    background-color: #f3e29f;
+    border-bottom: 0.11vh solid rgba(13, 59, 102, 0.2);
+    box-shadow: 0vh 0.44vh 0.44vh rgba(0, 0, 0, 0.1);
+    bottom: 0px;
+    left: 0px;
+}
+
+.cor_login{ /* < Cor do texto do botao login > */
+    color:#FAF0CA;
+    font-weight: bold;
+    font-size: large;
+}
+
+.botaoLogin{ /* < Caracterização do botão login > */   
+    background-color: #F95738; 
+    border: 0.001cm solid #EE964B;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.4);;
+    border-radius: 10px;
+    margin: 2px;
+    padding: 3px 5px;
+    font-size: 13px;
+    margin-left: 10px;
+} 
+
+@keyframes efeito_cor_login { /* < Animação do Hover no botao login > */
+    0% {
+        background-color: #f82900;
+        border-radius: 10px;
+    }
+    50% {
+        background-color: #f82900;
+        border-radius: 10px;
+    }
+    100% {
+        background-color: #f82900 20%;
+        border-radius: 10px;
+    }
+}
+
+.botaoLogin:hover{ /* < Hover: Animação do Botao Login > */
+    text-decoration: underline #FAF0CA;
+    animation: efeito_cor_login 1s ease;
+}
+
+.nav-login{ /* < Texto do botao login > */
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-item{ /* < Texto dos itens da nav bar > */  
+    font-size: 23px;
+    font-weight: bold;
+    border-right: 0.1vh solid rgba(0, 0, 0, 0.1);
+    border-left: 0.1vh solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+@keyframes efeito_cor { /* < Animação do Hover dos itens da Nav Bar > */
+    0% {
+        background-color: #fdfaef;
+        border-radius: 10px;
+    }
+    50% {
+        background-color: #fcf5dc;
+        border-radius: 10px;
+    }
+    100% {
+        background-color: #FAF0CA ;
+        border-radius: 10px;
+    }  
+}
+
+.nav-item:hover{ /* < Hover: Animação dos itens > */
+    animation: ease;
+    text-decoration: underline;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: efeito_cor 1s ease;
+}
+
+.cor_headertxt{ /* < Cor do texto da Nav Bar > */
+    color: #0D3B66 !important;
+    margin-right: 70px;
+    margin-left: 70px; 
+}
+
+/*-------- NAV BAR --------*/
+
+/*FOOTER Chico
+footer{
+    background-color: #0D3B66;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer_esq{
+    font-size: 14px;
+    text-align: left;
+}
+
+.footer_dir{
+    font-size: 14px;
+    text-align: right;
+}
+ -------- FOOTER --------*/
+
+ /*-------- Footer Manel--------*/
+
+.footer_div{
+    background-color: #0D3B66;
+    outline: 3px solid #faf0ca;
+    position: relative;
+    z-index: 0; 
+    height: 40px;
+}
+
+.hiperlinks_footer_esq{
+    text-decoration: none;
+    font-weight: bold;
+    color: #FAF0CA;
+    font-size: 11px;
+    margin-left: 15px;
+    margin-right: 20px; 
+}
+
+.hiperlinks_footer_esq:hover{
+    text-decoration: none;
+    font-weight: bold;
+    color: #FAF0CA;
+    font-size: 18px;
+    text-decoration: underline;
+}
+
+.hiperlinks_footer_dir{
+    text-decoration: none;
+    font-weight: bold;
+    color: #FAF0CA;
+    font-size: 11px;
+    margin-left: 20px;
+    margin-right: 15px;
+}
+
+.hiperlinks_footer_dir:hover{
+    text-decoration: none;
+    font-weight: bold;
+    color: #FAF0CA;
+    font-size: 18px;
+    text-decoration: underline;
+}
+/*-------- Footer --------*/

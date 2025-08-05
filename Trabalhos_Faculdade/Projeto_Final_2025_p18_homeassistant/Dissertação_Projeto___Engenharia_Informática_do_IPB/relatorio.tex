@@ -1,0 +1,142 @@
+\documentclass[12pt,a4paper,twoside]{ipb}
+
+% Pacote para projeto (não usar em dissertação de mestrado)
+\usepackage{projei}
+
+% Idioma e codificação
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+
+% Gestão de bibliografia com BibLaTeX
+\usepackage[style=ieee,backend=biber]{biblatex}
+\addbibresource{lib/refs.bib}
+
+% Pacotes gráficos e visuais
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+\usepackage{color}
+\usepackage[table,xcdraw]{xcolor}  % Corrigido sem conflitos
+
+% Formatação e estrutura
+\usepackage{geometry}
+\geometry{a4paper, margin=2cm}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{tabulary}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{placeins}
+\usepackage{needspace}
+\usepackage{lipsum}
+\usepackage{etoolbox}
+\usepackage{pdfpages}
+
+% Links
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  urlcolor=black,
+  linkcolor=black,
+  citecolor=black,
+  bookmarks=true,
+  pdfstartview=FitH
+}
+
+% Listagens de código
+\usepackage{listings}
+\definecolor{codegray}{gray}{0.95}
+\definecolor{yamlkey}{rgb}{0.0,0.0,0.6}
+\definecolor{yamlstring}{rgb}{0.7,0.0,0.0}
+
+\lstdefinelanguage{YAML}{
+  keywords={true,false,null,y,n},
+  keywordstyle=\color{yamlkey},
+  basicstyle=\scriptsize\ttfamily,
+  commentstyle=\color{gray},
+  stringstyle=\color{yamlstring},
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[b]'
+}
+
+\lstset{
+  inputencoding=ascii,
+  basicstyle=\ttfamily\scriptsize,
+  breaklines=true,
+  breakatwhitespace=false,
+  numbers=left,
+  numberstyle=\tiny,
+  captionpos=b,
+  frame=single,
+  xleftmargin=3.5em,
+  framexleftmargin=3.5em,
+  showstringspaces=false,
+  columns=fullflexible,
+  literate=
+    {°}{{\textdegree}}1
+    {á}{{\'a}}1
+    {ã}{{\~a}}1
+    {ç}{{\c{c}}}1
+    {é}{{\'e}}1
+    {º}{{\textordmasculine}}1
+    {ê}{{\^e}}1
+    {_}{{\_}}1
+}
+
+% Metadados do projeto
+\title{Aplicação para controlo de casa inteligente, utilizando Home Assistant}
+\author{José Guedes - a56576}
+\secondauthor{Nelson Fernandes - a51796}
+\supervisor{Prof. Pedro Filipe Fernandes Oliveira}
+\cosupervisor{Prof. Paulo Matos}
+\courseyear{2024-2025}
+
+% Glossário
+\makeglossaries
+\loadglsentries{acronym}
+
+\begin{document}
+
+% Capas e prefácio
+\beforepreface
+
+\prefacesection*{Resumo}
+\input{chapters/resumo}
+
+\prefacesection*{Abstract}
+\input{chapters/abstract}
+
+% Siglas
+\afterpreface
+\printglossary[type=\acronymtype,title={Siglas}]
+
+% Corpo principal
+\bodystart
+\cleardoublepage \input{chapters/cap01}
+\cleardoublepage \input{chapters/cap02}
+\cleardoublepage \input{chapters/cap03}
+\cleardoublepage \input{chapters/cap04}
+\cleardoublepage \input{chapters/cap05}
+\cleardoublepage \input{chapters/cap06}
+
+% Bibliografia
+\printbibliography
+
+% Apêndices
+\appendix
+
+% Numeração especial para apêndices
+\pretocmd{\chapter}{%
+  \clearpage
+  \pagenumbering{arabic}%
+  \renewcommand*{\thepage}{\thechapter\arabic{page}}%
+}{}{}
+
+% Inclusão dos apêndices
+\input{chapters/apendice01}
+\input{chapters/apendice02}
+\input{chapters/apendice03}
+\input{chapters/apendice04}
+
+\end{document}

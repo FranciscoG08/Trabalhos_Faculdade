@@ -1,0 +1,33 @@
+# Pumps mostram 0W em standby
+- sensor:
+    - name: "Bomba AQS Filtered Power"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% if states('sensor.bomba_aqs_power')|float < 50 %}
+          0
+        {% else %}
+          {{ states('sensor.bomba_aqs_power') }}
+        {% endif %}
+
+    - name: "Bomba Calor Filtered Power"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% if states('sensor.bomba_calor_power')|float < 200 %}
+          0
+        {% else %}
+          {{ states('sensor.bomba_calor_power') }}
+        {% endif %}
+
+    - name: "Heat Pump Daily Consumption"
+      unit_of_measurement: "kWh"
+      device_class: energy
+      state_class: total_increasing
+      state: >
+        {{ (
+          states('sensor.altherma_climatecontrol_cooling_daily_electrical_consumption') | float(0) +
+          states('sensor.altherma_climatecontrol_heating_daily_electrical_consumption') | float(0)
+        ) | round(2) }}

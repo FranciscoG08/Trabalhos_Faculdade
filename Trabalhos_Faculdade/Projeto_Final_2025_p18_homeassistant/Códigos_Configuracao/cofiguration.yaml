@@ -1,0 +1,17 @@
+default_config:
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+logger:
+  logs:
+    pymodbus: debug
+    huawei_solar: debug
+    homeassistant.components.huawei_solar: debug
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+template: !include_dir_merge_list templates/
+utility_meter: !include_dir_merge_named utility_meter/

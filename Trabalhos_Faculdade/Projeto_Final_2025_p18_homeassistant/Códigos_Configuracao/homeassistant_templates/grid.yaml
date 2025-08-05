@@ -1,0 +1,16 @@
+# Botao de exportacao
+- sensor:
+    - name: "Exportacao_Status"
+      unique_id: exportacao_status
+      state: >
+        {% set export = states('sensor.rede_power') | float(0) %}
+
+        {% if export < -3000 %}
+          ultra
+        {% elif export < -1000 %}
+          high
+        {% elif export <= -500 %}
+          medium
+        {% else %}
+          low
+        {% endif %}

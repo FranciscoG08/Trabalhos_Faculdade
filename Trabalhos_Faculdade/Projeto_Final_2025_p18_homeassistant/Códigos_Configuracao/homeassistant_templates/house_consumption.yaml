@@ -1,0 +1,26 @@
+#Necessario para o card energy
+- sensor:
+    - name: "Consumo da Casa novo"
+      unit_of_measurement: "W"
+      device_class: power
+      state_class: measurement
+      state: >
+        {% set solar = states('sensor.solar_total') | float(0) %}
+        {% set battery_power = states('sensor.batteries_charge_discharge_power') %}
+        {% set grid_power = states('sensor.rede_power') %}
+
+        {% if battery_power in ['unknown', 'unavailable', 'null', None] or
+              grid_power in ['unknown', 'unavailable', 'null', None] %}
+          unavailable
+        {% else %}
+          {% set battery_power = battery_power | float(0) %}
+          {% set grid_power = grid_power | float(0) %}
+
+          {% set charging_battery = battery_power if battery_power > 0 else 0 %}
+          {% set from_battery = -battery_power if battery_power < 0 else 0 %}
+          {% set from_grid = grid_power if grid_power > 0 else 0 %}
+          {% set to_grid = -grid_power if grid_power < 0 else 0 %}
+
+          {% set consumo = solar - charging_battery - to_grid + from_battery + from_grid %}
+          {{ consumo | round(2) }}
+        {% endif %}

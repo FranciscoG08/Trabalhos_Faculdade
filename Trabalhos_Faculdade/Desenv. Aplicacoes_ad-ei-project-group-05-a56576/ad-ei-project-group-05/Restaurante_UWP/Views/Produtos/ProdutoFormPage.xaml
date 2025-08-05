@@ -1,0 +1,145 @@
+﻿<Page
+    x:Class="Restaurante_UWP.Views.Produtos.ProdutoFormPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Restaurante_UWP.Views.Produtos"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#003366" Offset="0" />
+            <GradientStop Color="#004080" Offset="0.5" />
+            <GradientStop Color="#0066cc" Offset="1" />
+        </LinearGradientBrush>
+    </Page.Background>
+
+    <Grid>
+        <Ellipse Fill="{ThemeResource SystemAccentColor}"
+                 Height="200" 
+                 HorizontalAlignment="Center" 
+                 VerticalAlignment="Top" 
+                 Margin="0,0,0,-100" />
+        <TextBlock Text="Adicionar/Editar Produto"
+                   Foreground="White" 
+                   FontSize="28" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Top" 
+                   Margin="0,80,0,0"/>
+
+        <Grid Margin="20,200,20,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Inputs -->
+            <StackPanel Grid.Row="0" Spacing="20" HorizontalAlignment="Center">
+                <Border Background="LightSeaGreen"
+                        Width="350"
+                        CornerRadius="25"
+                        Padding="10">
+                    <AutoSuggestBox x:Name="asbCategories"
+                                    Header="Categoria"
+                                    PlaceholderText="Insira a categoria..."
+                                    QueryIcon="Find"
+                                    DisplayMemberPath="Nome"
+                                    Text="{x:Bind ProdutoViewModel.CategoriaNome,
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                    TextChanged="asbCategories_TextChanged"
+                                    QuerySubmitted="asbCategories_QuerySubmitted"
+                                    SuggestionChosen="asbCategories_SuggestionChosen"
+                                    FontSize="16"
+                                    BorderThickness="0"/>
+                </Border>
+
+                <Border Background="LightSeaGreen"
+                        Width="350"
+                        CornerRadius="25"
+                        Padding="10">
+                    <TextBox x:Name="txtName"
+                             Header="Produto"
+                             PlaceholderText="Nome do Produto..."
+                             FontSize="16"
+                             BorderThickness="0"
+                             Text="{x:Bind ProdutoViewModel.ProdutoNome,
+                                    Mode=TwoWay,
+                                    UpdateSourceTrigger=PropertyChanged}"/>
+                </Border>
+
+                <Border Background="LightSeaGreen"
+                        Width="350"
+                        CornerRadius="25"
+                        Padding="10">
+                    <TextBox x:Name="txtPreco"
+                             Header="Preço"
+                             PlaceholderText="Insira o Preço..."
+                             FontSize="16"
+                             BorderThickness="0"
+                             Text="{x:Bind ProdutoViewModel.Preco,
+                                    Mode=TwoWay,
+                                    UpdateSourceTrigger=PropertyChanged}"/>
+                </Border>
+
+                <Border Background="LightSeaGreen"
+                        Width="350"
+                        CornerRadius="25"
+                        Padding="10">
+                    <StackPanel>
+                        <Image Margin="0, 10" x:Name="thumb" MaxHeight="150"
+                                Source="{x:Bind ProdutoViewModel.Thumb,
+                                        Converter={StaticResource bytesToImageConverter},
+                                        Mode=OneWay}"/>
+                        <Button Margin="0,10" x:Name="btnUpload"
+                                Tapped="btnUpload_Tapped" Content="Imagem..." Width="321"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Background="Red"
+                        Padding="5"
+                        Visibility="{x:Bind ProdutoViewModel.Invalid, Mode=OneWay}"
+                        CornerRadius="10">
+                    <TextBlock Text="Produto Invalido"
+                               Foreground="White"
+                               HorizontalAlignment="Center"/>
+                </Border>
+            </StackPanel>
+
+            <!-- Buttons -->
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom" Spacing="30" Margin="0,40,0,0">
+                <Button x:Name="btnSave" 
+                        Content="✔" 
+                        Width="70" 
+                        Height="70"
+                        Background="{ThemeResource SystemAccentColor}" 
+                        Foreground="White" 
+                        FontSize="24"
+                        CornerRadius="35"
+                        Click="btnSave_Click"
+                        IsEnabled="{x:Bind ProdutoViewModel.Valid, Mode=OneWay}">
+                    <Button.Flyout>
+                        <Flyout>
+                            <Border Background="Red" Padding="10" CornerRadius="10">
+                                <TextBlock Text="Não foi possivel adicionar o Produto" Foreground="White"/>
+                            </Border>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+
+                <Button x:Name="btnCancel"
+                        Content="✖"
+                        Width="70"
+                        Height="70"
+                        Background="Red" 
+                        Foreground="White" 
+                        FontSize="24"
+                        CornerRadius="35"
+                        Click="btnCancel_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,19 @@
+﻿<Application
+    x:Class="Restaurante_UWP.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Restaurante_UWP"
+    xmlns:converters="using:Restaurante_UWP.Converters">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <converters:BytesToImageConverter x:Key="bytesToImageConverter"/>
+                    <converters:ColorConverter x:Key="ColorConverter"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>

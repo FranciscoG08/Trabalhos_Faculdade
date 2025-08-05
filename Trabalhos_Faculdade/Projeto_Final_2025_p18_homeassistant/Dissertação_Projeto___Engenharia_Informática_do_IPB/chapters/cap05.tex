@@ -1,0 +1,22 @@
+\chapter{Conclusões}\label{cap:conclusions}
+
+O interesse por este projeto surgiu da vontade de explorar o potencial da domótica aliada à integração de sistemas inteligentes, com enfoque numa plataforma \gls{OS} como o \gls{HA}. Desde o início, o desafio foi compreender e controlar as diferentes valências de uma casa inteligente, desde a gestão energética à climatização, videovigilância, automação de estores e integração de sensores ambientais.
+
+Ao longo do desenvolvimento, foi necessário realizar uma pesquisa aprofundada sobre os dispositivos utilizados, aprender as boas práticas da configuração com \gls{YAML} e enfrentar desafios técnicos, como a integração de equipamentos distintos e a personalização de dashboards funcionais e intuitivos. A introdução do \gls{HACS} e de integrações como a \textit{Huawei Solar}, \textit{Reolink}, \textit{Daikin}, \textit{Shelly}, \textit{Netatmo} e \textit{iRobot} permitiu criar um sistema robusto e flexível, adaptado às necessidades reais de uma habitação moderna.
+
+Apesar das dificuldades encontradas, o projeto revelou-se uma experiência enriquecedora. Não só permitiu aplicar conhecimentos técnicos adquiridos ao longo da licenciatura, como também impulsionou novas aprendizagens em áreas como automação residencial, monitorização energética e interfaces homem-máquina. O resultado é uma solução funcional, prática e escalável, capaz de evoluir com as necessidades do utilizador.
+
+Em suma, este trabalho demonstrou a viabilidade de construir um sistema de casa inteligente totalmente integrado, centralizado, personalizável e de baixo custo, utilizando apenas ferramentas de código aberto e conectividade Wi-Fi. O projeto reforça ainda a importância da interoperabilidade entre dispositivos e da usabilidade no contexto da domótica, abrindo caminho a futuros desenvolvimentos e integrações ainda mais avançadas.
+
+
+\newpage
+Adicionalmente, importa referir uma questão de segurança.
+
+
+É de elevada importância, considerando as boas práticas de segurança, utilizar protocolos \textit{TLS/SSL} integrando add-ons como o \textit{Duck DNS} que inclui configurações automáticas \textit{HTTPS} com certificados \textit{Let's Encrypt}, garantindo a encriptação das comunicações e proteção acrescida contra exposição de dados e possíveis ataques, ex. \textit{man-in-the-middle (MITM)}.
+
+
+Da mesma forma, a implementação de uma rede WiFi dedicada permite isolar os dispositivos \gls{IoT} na sua própria rede, reduzindo o risco de estes serem comprometidos e, potencialmente, darem acesso à rede principal e a outros hosts o que representaria uma falha grave de segurança. Esta solução, ao endereçar o tráfego \gls{IoT} para uma rede separada, liberta a rede principal que terá um desempenho melhorado especialmente se tivermos um número elevado de dispositivos ligados. A gestão e a resolução de problemas relacionados com os dispositivos \gls{IoT} acaba por ser facilitada uma vez que podem ser aplicadas e/ou testadas políticas específicas sem afetar a rede principal.
+
+Durante o desenvolvimento deste projeto, foi também elaborado um artigo científico detalhado sobre a plataforma \gls{HA}, com especial foco na estrutura do sistema e nas dashboards criadas. Este artigo descreve a organização do sistema de casa inteligente, as funcionalidades implementadas e a integração entre os vários componentes. O trabalho foi submetido à 13th edition of the Technological Ecosystems for Enhancing Multiculturality (TEEM) e à 12th International Electronic Conference on Sensors and Applications, com o objetivo de partilhar os resultados alcançados e contribuir para a comunidade científica na área da automação residencial e IoT.
+
